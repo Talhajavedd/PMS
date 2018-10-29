@@ -6,7 +6,12 @@ class User < ApplicationRecord
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
   validate :validate_username
 
-  
+  enum role: [:user, :manager, :admin]
+  after_initialize :set_default_role, :if => :new_record?
+
+  def set_default_role
+    self.role ||= :user
+  end
 
 	def validate_username
   		if User.where(email: username).exists?
