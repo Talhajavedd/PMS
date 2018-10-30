@@ -3,20 +3,18 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:login]
-  
+
   validate :validate_username
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
 
+  ADMIN = 'admin'
+
   enum role: [:user, :manager, :admin]
-  
+
   after_initialize :set_default_role, :if => :new_record?
   scope :non_admin_users, -> { where.not(role: :admin) }
 
   attr_writer :login
-
-  def set_default_role
-    self.role ||= :user
-  end
 
   def validate_username
     if User.where(email: username).exists?
@@ -28,12 +26,12 @@ class User < ApplicationRecord
     @login || self.username || self.email
   end
 
-  def enable_user
-    self.status = true
+  def toggle_enable
+    self.toggle(:enable).save
   end
 
-  def disable_user
-    self.status = false
+  def set_default_role
+    self.role ||= :user
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -49,5 +47,17 @@ class User < ApplicationRecord
         where(username: conditions[:username]).first
       end
     end
+  end
+
+  def active_for_authentication?
+    super && enable?
+  end
+
+  def inactive_message
+    enable? ? super : :not_enable
+  end
+
+  def self.roles_except_admin
+    self.roles.reject{ |role, _| role == ADMIN }
   end
 end

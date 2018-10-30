@@ -21,9 +21,11 @@
   <div class='field'>
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: 'off' %>
-  </div>
+  </div><br />
+
+  <%= f.select(:role, User.roles_except_admin.keys.map {|role| [role.titleize,role]}) %><br/><br/>
 
   <div class='actions'>
-    <%= f.submit 'Add user' %>
+    <%= f.submit %>
   </div>
 <% end %>
