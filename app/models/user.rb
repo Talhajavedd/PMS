@@ -10,6 +10,7 @@ class User < ApplicationRecord
   enum role: [:user, :manager, :admin]
   
   after_initialize :set_default_role, :if => :new_record?
+  scope :non_admin_users, -> { where.not(role: :admin) }
 
   attr_writer :login
 
@@ -40,7 +41,7 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     conditions[:email].downcase! if conditions[:email]
     if login = conditions.delete(:login)
-     	where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions).where(['lower(username) = :value OR lower(email) = :value', { value: login.downcase }]).first
     else
       if conditions[:username].nil?
         where(conditions).first

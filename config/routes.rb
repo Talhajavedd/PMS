@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
+  root 'projects#index'
   devise_for :users
-  root 'projects#index'   
   namespace :admin do
     resources :users
   end
-  post "admin/users/deactivate", to: "users#deactivate"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html  
 end

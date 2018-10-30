@@ -1,11 +1,11 @@
-class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!
+class Admin::UsersController < Admin::AdminsController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   def index
-    @users = User.all
+    @users = User.non_admin_users
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -13,20 +13,20 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def create
     @user = User.new(user_params)
+
     if @user.save
       redirect_to admin_users_path(@user), notice: "User succesfully created!"
     else
       render 'new'
     end
+
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_without_password(user_params)
       redirect_to admin_user_path(@user)
     else
@@ -34,20 +34,14 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def deactivate
-  	@user = User.find(params[:user_id])
-  	if @user.status
-     user.enable_user
-   else
-     user.disable_user
-   end
- end
+  def destroy
+    @user.destroy
+    redirect_to admin_users_path
+  end
 
- def destroy
-   @user = User.find(params[:id])
-   @user.destroy
-   redirect_to admin_users_path
- end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   private
   def user_params
