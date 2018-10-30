@@ -1,0 +1,16 @@
+<%= form_for @client do |f| %>
+
+  <div class='field'>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :company %><br />
+    <%= f.text_field :company %><br />
+  </div>
+
+  <div class='actions'>
+    <%= f.submit %>
+  </div>
+<% end %>

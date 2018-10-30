@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     resources :users
     patch "/users/set_user_activiation/:id", to: "users#set_user_activiation", as: :user_activation
   end
+  resources :clients
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html  
 end
