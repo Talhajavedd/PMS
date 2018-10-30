@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_132744) do
+ActiveRecord::Schema.define(version: 2018_10_30_195528) do
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.string "company"
+    t.string "name", limit: 30, null: false
+    t.string "company", limit: 30, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_clients_on_name", unique: true
