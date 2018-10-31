@@ -37,7 +37,7 @@ gem 'devise'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
+gem 'font-awesome-sass', '~> 5.4.1'
 gem 'jquery-easing-rails', '~> 0.0.2'
 
 group :development, :test do

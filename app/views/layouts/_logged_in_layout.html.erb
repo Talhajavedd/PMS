@@ -1,0 +1,13 @@
+<body id="page-top">
+  <%= render '/layouts/navbar' %>
+  <div id="wrapper">
+    <%= render '/layouts/sidebar' %>
+    <div id="content-wrapper">
+      <div class="container-fluid">
+        <%= yield %>
+      </div>
+    <%= render '/layouts/footer' %>
+    </div>
+  </div>
+  <%= render '/layouts/logout' if user_signed_in? %>
+</body>

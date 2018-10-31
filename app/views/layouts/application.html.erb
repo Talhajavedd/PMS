@@ -8,19 +8,13 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body class="bg-dark">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <% if user_signed_in? %>
-      <%= link_to "Sign_out", destroy_user_session_path, :method => :delete %>
-      <%= link_to "Profile", edit_user_registration_path %>
-    <%else%>
-      <%= link_to "Sign_up", new_user_registration_path %>
-      <%= link_to "Sign_in", new_user_session_path %>
-    <%end%>
-    
+  <% if user_signed_in? %>
+    <%= render '/layouts/logged_in_layout' %>
+  <% else %>
+    <body class="bg-dark">
     <%= yield %>
-  </body>
+    </body>
+  <% end %>
+      <!-- <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p> -->
 </html>
