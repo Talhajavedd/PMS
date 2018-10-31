@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     resources :admins, only: [:index], as: 'root'
   end
   resources :clients
+  match "*path", to: "exceptions#catch_404", via: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html  
 end
