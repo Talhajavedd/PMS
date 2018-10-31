@@ -1,4 +1,4 @@
-class Admin::ClientsController < ApplicationController
+class Admin::ClientsController < Admin::AdminsController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index

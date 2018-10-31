@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users do
       member do
-        patch 'set_user_activiation'
+        patch 'set_user_activation'
       end
     end
     resources :clients

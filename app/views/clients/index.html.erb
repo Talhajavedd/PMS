@@ -1,5 +1,8 @@
 <h1>Listing clients</h1>
-<%= link_to 'New Client', new_client_path %>
+
+<% if current_user.manager? %>
+  <%= link_to 'New Client', new_client_path %>
+<% end %>
 
 <table>
   <tr>
@@ -12,8 +15,11 @@
       <td><%= client.name %></td>
       <td><%= client.company %></td>
       <td><%= link_to 'Show', client_path(client) %></td>
-      <td><%= link_to 'Edit', edit_client_path(client) %></td>
-      <td><%= link_to 'Destroy', client_path(client), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+      <% if current_user.manager? %>
+        <td><%= link_to 'Edit', edit_client_path(client) %></td>
+        <td><%= link_to 'Destroy', client_path(client), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

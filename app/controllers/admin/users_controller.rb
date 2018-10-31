@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::AdminsController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_user_activiation]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_user_activation]
 
   def index
     @users = User.non_admin_users
@@ -40,7 +40,7 @@ class Admin::UsersController < Admin::AdminsController
     redirect_to admin_users_path
   end
 
-  def set_user_activiation
+  def set_user_activation
     @user.toggle_enable
     redirect_to admin_users_path(@user)
   end

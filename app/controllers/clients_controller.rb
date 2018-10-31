@@ -1,7 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_manager, only: [:new, :edit, :update, :destroy]
-  before_action :authenticate_admin, only: [:index]
+  before_action :authenticate_manager, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @clients = Client.all
@@ -41,19 +40,6 @@ class ClientsController < ApplicationController
   end
 
   private
-  def authenticate_manager
-    unless current_user.role == "manager"
-      flash[:error] = "You should be a manager to access this page"
-      redirect_to clients_path
-    end
-  end
-
-  def authenticate_admin
-    if current_user.admin?
-      redirect_to admin_clients_path
-    end
-  end
-
   def set_client
     @client = Client.find(params[:id])
   end

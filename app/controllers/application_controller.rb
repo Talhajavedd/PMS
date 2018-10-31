@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  def authenticate_manager
+    unless current_user.manager?
+      flash[:error] = "You should be a manager to access this page"
+      redirect_to clients_path
+    end
+  end
+
   def configure_permitted_parameters
     added_attrs = [:username, :remember_me, :email, :password, :password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
