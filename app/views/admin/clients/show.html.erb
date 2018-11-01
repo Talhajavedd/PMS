@@ -1,11 +1,25 @@
-<p>
-  <strong>Name:</strong>
-  <%= @client.name %>
-</p>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span">Clients</span>
+  </li>
+  <li class="breadcrumb-item active">Details</li>
+</ol>
 
-<p>
-  <strong>Company:</strong>
-  <%= @client.company %>
-</p>
+<h2>Client Details</h2>
+<hr>
 
-<%= link_to 'Back', admin_clients_path %>
+
+<div class="container">
+  <div class="card card-register mx-auto mt-5">
+    <div class="card-body text-center">
+      <p>
+        <span class="font-weight-light font-italic"> Client name: </span>
+        <span class="font-weight-bold"><%= @client.name %></span>
+      </p>
+      <p>
+        <span class="font-weight-light font-italic"> Client Company: </span>
+        <span class="font-weight-bold"><%= @client.company %></span>
+      </p>
+    </div>
+  </div>
+</div>
