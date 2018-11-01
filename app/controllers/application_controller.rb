@@ -13,10 +13,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  def authenticate_manager
+  def authenticate_manager(url)
     unless current_user.manager?
       flash[:alert] = "You should be a manager to access this page"
-      redirect_to clients_path
+      redirect_to url
     end
   end
 

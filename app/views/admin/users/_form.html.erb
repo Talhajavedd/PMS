@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="dropdown">
-      <%= f.select(:role, User.roles_except_admin.keys.map {|role| [role.titleize,role]}, {}, { :class => "btn btn-secondary dropdown-toggle" }) %><br/><br/>
+      <%= f.select(:role, User.roles_except_admin.keys.map {|role| [role.titleize,role]}, {}, { class: "btn btn-secondary dropdown-toggle" }) %><br/><br/>
     </div>
     <%= f.submit class: "btn btn-dark btn-block" %>
   <% end %>
