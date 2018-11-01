@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   protected
   def authenticate_manager
     unless current_user.manager?
-      flash[:error] = "You should be a manager to access this page"
+      flash[:alert] = "You should be a manager to access this page"
       redirect_to clients_path
     end
   end

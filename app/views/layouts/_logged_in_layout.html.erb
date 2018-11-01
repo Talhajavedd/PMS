@@ -4,6 +4,8 @@
     <%= render '/layouts/sidebar' %>
     <div id="content-wrapper">
       <div class="container-fluid">
+        <%= notice %>
+        <%= alert %>
         <%= yield %>
       </div>
     <%= render '/layouts/footer' %>
