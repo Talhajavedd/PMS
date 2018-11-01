@@ -1,4 +1,5 @@
 class Client < ApplicationRecord
+  has_many :projects, dependent: :destroy
 
   VALID_USERNAME_REGEX = /\A[a-zA-Z0-9]+\z/
 
