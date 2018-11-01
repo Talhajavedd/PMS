@@ -1,11 +1,33 @@
-<p>
-  <strong>Name:</strong>
-  <%= @user.username %>
-</p>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span">Users</span>
+  </li>
+  <li class="breadcrumb-item active">Details</li>
+</ol>
 
-<p>
-  <strong>email:</strong>
-  <%= @user.email %>
-</p>
+<h2>User Details</h2>
+<hr>
 
-<%= link_to 'Back', admin_users_path %>
+
+<div class="container">
+  <div class="card card-register mx-auto mt-5">
+    <div class="card-body text-center">
+      <p>
+        <span class="font-weight-light font-italic"> Username: </span>
+        <span class="font-weight-bold"><%= @user.username %></span>
+      </p>
+      <p>
+        <span class="font-weight-light font-italic"> Email: </span>
+        <span class="font-weight-bold"><%= @user.email %></span>
+      </p>
+      <p>
+        <span class="font-weight-light font-italic"> Role: </span>
+        <span class="font-weight-bold"><%= @user.role %></span>
+      </p>
+      <p>
+        <span class="font-weight-light font-italic"> Active: </span>
+        <span class="font-weight-bold"><%= @user.enable %></span>
+      </p>
+    </div>
+  </div>
+</div>
