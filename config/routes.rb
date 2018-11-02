@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     end
     resources :clients
     resources :admins, only: [:index], as: 'root'
-    resources :projects
   end
   resources :clients
   match "*path", to: "exceptions#catch_404", via: :all
