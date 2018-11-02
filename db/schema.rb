@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_143515) do
+ActiveRecord::Schema.define(version: 2018_11_02_103957) do
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
@@ -20,9 +20,19 @@ ActiveRecord::Schema.define(version: 2018_11_01_143515) do
     t.index ["name"], name: "index_clients_on_name", unique: true
   end
 
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "amount"
+    t.bigint "project_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_payments_on_project_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
-    t.bigint "client_id", null: false
+    t.bigint "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_projects_on_client_id"
@@ -45,5 +55,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_143515) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "payments", "projects"
+  add_foreign_key "payments", "users"
   add_foreign_key "projects", "clients"
 end
