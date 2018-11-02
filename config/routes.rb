@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :clients
     resources :admins, only: [:index], as: 'root'
     resources :projects
+    resources :payments
   end
   resources :clients
   resources :payments
