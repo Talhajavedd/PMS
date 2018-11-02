@@ -1,0 +1,16 @@
+<div class="card-body">
+  <%= form_for [:admin, @project] do |f| %>
+
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= f.text_field :name, class: "form-control", placeholder: 'Name' %>
+        <%= f.label :name %>
+      </div>
+    </div>
+    <div class="text-right">
+      Choose Client:
+      <%= collection_select(:project, :client_id, Client.all, :id, :name, {}, {class: "btn btn-secondary dropdown-toggle"}) %><br /><br />
+    </div>
+    <%= f.submit class: "btn btn-dark btn-block" %>
+  <% end %>
+</div>
