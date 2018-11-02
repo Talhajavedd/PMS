@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   belongs_to :client
+  has_many :payments, dependent: :destroy
 
   VALID_NAME_REGEX = /\A[a-zA-Z0-9]+\z/
 
