@@ -12,8 +12,9 @@ Rails.application.routes.draw do
     end
     resources :clients
     resources :admins, only: [:index], as: 'root'
-    resources :projects
-    resources :payments
+    resources :projects do
+      resources :payments
+    end
   end
   resources :clients
   match "*path", to: "exceptions#catch_404", via: :all
