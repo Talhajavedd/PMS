@@ -9,9 +9,6 @@
     <li class="nav-item">
       <%= link_to '<i class="fas fa-fw fa-users"></i> Users'.html_safe, admin_users_path, class: "nav-link" %>
     </li>
-    <li class="nav-item">
-      <%= link_to '<i class="fas fa-dollar-sign"></i> Payments'.html_safe, admin_payments_path, class: "nav-link" %>
-    </li>
   </ul>
 <% elsif current_user.manager? %>
   <ul class="sidebar navbar-nav">
@@ -20,9 +17,6 @@
     </li>
     <li class="nav-item">
       <%= link_to '<i class="fas fa-fw fa-user-tie"></i> Clients'.html_safe, clients_path, class: "nav-link" %>
-    </li>
-    <li class="nav-item">
-      <%= link_to '<i class="fas fa-dollar-sign"></i> Payments'.html_safe, payments_path, class: "nav-link" %>
     </li>
   </ul>
 <% else current_user.user? %>

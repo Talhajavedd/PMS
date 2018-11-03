@@ -11,7 +11,18 @@
 <div class="container">
   <div class="card card-register mx-auto mt-5">
     <div class="card-header">Update Payment Info</div>
-      <%= render 'form' %>
+      <div class="card-body">
+        <%= form_for [@project, @payment] do |f| %>
+
+          <div class="form-group">
+            <div class="form-label-group">
+              <%= f.text_field :amount, class: "form-control", placeholder: 'Amount' %>
+              <%= f.label :amount %>
+            </div>
+          </div>
+          <%= f.submit class: "btn btn-dark btn-block" %>
+        <% end %>
+      </div>
   </div>
 </div>
 <br/><br/>

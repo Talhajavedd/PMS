@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects do 
+    resources :payments
+  end
   root 'projects#index'
   devise_for :users
   namespace :admin do
@@ -14,7 +16,6 @@ Rails.application.routes.draw do
     resources :payments
   end
   resources :clients
-  resources :payments
   match "*path", to: "exceptions#catch_404", via: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html  
 end
