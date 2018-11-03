@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action only: [:new, :create, :edit, :update, :destroy] do
+  before_action only: [:delete, :new, :create, :edit, :update, :destroy] do
     authenticate_manager(projects_path)
   end
 
@@ -40,6 +40,11 @@ class ProjectsController < ApplicationController
     @project.destroy
     redirect_to projects_path
   end
+
+  def delete
+    @project = Project.find(params[:project_id])
+  end
+
 
   private
   def set_project

@@ -38,6 +38,10 @@ class Admin::ProjectsController < Admin::AdminsController
     redirect_to admin_projects_path
   end
 
+  def delete
+    @project = Project.find(params[:project_id])
+  end
+
   private
   def set_project
     @project = Project.find(params[:id])

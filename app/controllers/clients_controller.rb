@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
-  before_action only: [:new, :create, :edit, :update, :destroy] do
+  before_action only: [:delete, :new, :create, :edit, :update, :destroy] do
     authenticate_manager(clients_path)
   end
 
@@ -39,6 +39,10 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     redirect_to clients_path
+  end
+
+  def delete
+    @client = Client.find(params[:client_id])
   end
 
   private

@@ -39,6 +39,11 @@ class Admin::PaymentsController < Admin::AdminsController
     redirect_to admin_project_payments_path(@project)
   end
 
+  def delete
+    @project = Project.find(params[:project_id])
+    @payment = @project.payments.find(params[:payment_id])
+  end
+
   private
   def set_project
      @project = Project.find(params[:project_id])

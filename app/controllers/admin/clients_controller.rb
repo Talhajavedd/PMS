@@ -38,6 +38,11 @@ class Admin::ClientsController < Admin::AdminsController
     redirect_to admin_clients_path
   end
 
+  def delete
+    @client = Client.find(params[:client_id])
+  end
+
+
   private
   def set_client
     @client = Client.find(params[:id])

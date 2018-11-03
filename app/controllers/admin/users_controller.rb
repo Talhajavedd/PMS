@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::AdminsController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_user_activation]
+  before_action :set_user, only: [:destroy, :show, :edit, :update, :set_user_activation]
 
   def index
     @users = User.non_admin_users
@@ -32,7 +32,6 @@ class Admin::UsersController < Admin::AdminsController
     else
       render 'edit'
     end
-
   end
 
   def destroy
@@ -43,6 +42,10 @@ class Admin::UsersController < Admin::AdminsController
   def set_user_activation
     @user.toggle_enable
     redirect_to admin_users_path(@user)
+  end
+
+  def delete
+    @user = User.find(params[:user_id])
   end
 
   def set_user
