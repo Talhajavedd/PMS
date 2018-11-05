@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       resources :payments do
         get 'delete'
       end
+    resources :time_logs do
+      get 'delete'
+    end
     end
   end
   resources :clients do
