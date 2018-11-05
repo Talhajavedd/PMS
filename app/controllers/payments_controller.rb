@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
     set_project
     authenticate_manager(root_path)
   end
-  before_action :set_payment, only: [:edit, :update, :destroy]
+  before_action :set_payment, only: %i[edit update destroy]
 
   def index
     @payments = @project.payments.all
@@ -14,24 +14,23 @@ class PaymentsController < ApplicationController
     @payment = @project.payments.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @payment = @project.payments.new(payment_params)
 
     respond_to do |format|
       if @payment.save
-        format.html {redirect_to projects_path, notice: "Payment succesfully created!"}
+        format.html { redirect_to projects_path, notice: 'Payment succesfully created!' }
       else
-        format.js { render :action => 'new' }
+        format.js { render action: 'new' }
       end
     end
   end
 
   def update
     if @payment.update(payment_params)
-      redirect_to project_payments_path(@project), notice: "Payment succesfully updated!"
+      redirect_to project_payments_path(@project), notice: 'Payment succesfully updated!'
     else
       render 'edit'
     end
@@ -47,10 +46,10 @@ class PaymentsController < ApplicationController
     @payment = @project.payments.find(params[:payment_id])
   end
 
-
   private
+
   def set_project
-     @project = Project.find(params[:project_id])
+    @project = Project.find(params[:project_id])
   end
 
   def set_payment

@@ -1,25 +1,23 @@
 class Admin::ClientsController < Admin::AdminsController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: %i[show edit update destroy]
 
   def index
     @clients = Client.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @client = Client.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @client = Client.new(client_params)
 
     if @client.save
-      redirect_to admin_clients_path(@client), notice: "Client succesfully created!"
+      redirect_to admin_clients_path(@client), notice: 'Client succesfully created!'
     else
       render 'new'
     end
@@ -42,8 +40,8 @@ class Admin::ClientsController < Admin::AdminsController
     @client = Client.find(params[:client_id])
   end
 
-
   private
+
   def set_client
     @client = Client.find(params[:id])
   end

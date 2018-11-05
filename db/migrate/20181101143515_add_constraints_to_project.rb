@@ -4,5 +4,4 @@ class AddConstraintsToProject < ActiveRecord::Migration[5.2]
     change_column :projects, :client_id, :bigint, null: false
     add_index :projects, :name, unique: true
   end
-
 end

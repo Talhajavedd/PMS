@@ -13,15 +13,16 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
   def authenticate_manager(url)
-    unless current_user.manager?
-      flash[:alert] = "You should be a manager to access this page"
-      redirect_to url
-    end
+    return unless current_user.manager?
+
+    flash[:alert] = 'You should be a manager to access this page'
+    redirect_to url
   end
 
   def configure_permitted_parameters
-    added_attrs = [:username, :remember_me, :email, :password, :password_confirmation]
+    added_attrs = %i[username remember_me email password password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end

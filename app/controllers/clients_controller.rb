@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
-  before_action only: [:delete, :new, :create, :edit, :update, :destroy] do
+  before_action :set_client, only: %i[show edit update destroy]
+  before_action only: %i[delete new create edit update destroy] do
     authenticate_manager(clients_path)
   end
 
@@ -8,21 +8,19 @@ class ClientsController < ApplicationController
     @clients = Client.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @client = Client.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @client = Client.new(client_params)
 
     if @client.save
-      redirect_to clients_path(@client), notice: "Client succesfully created!"
+      redirect_to clients_path(@client), notice: 'Client succesfully created!'
     else
       render 'new'
     end
@@ -46,6 +44,7 @@ class ClientsController < ApplicationController
   end
 
   private
+
   def set_client
     @client = Client.find(params[:id])
   end
