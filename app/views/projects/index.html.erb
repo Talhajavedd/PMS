@@ -18,14 +18,14 @@
           <tr>
             <th>Name</th>
             <th>Client</th>
-            <th colspan="5"></th>
+            <th colspan="7"></th>
           </tr>
         </thead>
         <tfoot>
           <tr>
             <th>Name</th>
             <th>Client</th>
-            <th colspan="5"></th>
+            <th colspan="7"></th>
           </tr>
         </tfoot>
         <tbody>
@@ -39,6 +39,10 @@
                 </td>
                 <td><%= link_to 'Show Payments', project_payments_path(project), class: "btn btn-outline-success" %></td>
               <% end %>
+              <td>
+                <%= link_to 'Add Time Logs', new_project_time_log_path(project),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myModal', class: 'btn btn-outline-primary'}  %>
+              </td>
+              <td><%= link_to 'Show Time Logs', project_time_logs_path(project), class: "btn btn-outline-primary" %></td>
               <td><%= link_to 'Show', project_path(project), class: "btn btn-dark" %></td>
               <% if current_user.manager? %>
                 <td><%= link_to 'Edit', edit_project_path(project), class: "btn btn-dark" %></td>
@@ -48,13 +52,13 @@
           <% end %>
         </tbody>
       </table>
+
+    </div>
       <% if current_user.manager? %>
-        <div class="text-right">
+        <div class="text-right mt-3">
           <%= link_to 'New Project', new_project_path, class: "btn btn-dark" %>
         </div>
       <% end %>
-
-    </div>
   </div>
 </div>
 
