@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include ExceptionHandler
 
+  layout :application_layout
+
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -25,5 +27,11 @@ class ApplicationController < ActionController::Base
     added_attrs = %i[username remember_me email password password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+  end
+
+  private
+
+  def application_layout
+    @current_user.nil? ? 'application' : 'logged_in_layout'
   end
 end

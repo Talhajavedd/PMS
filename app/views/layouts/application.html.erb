@@ -8,11 +8,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <% if user_signed_in? %>
-    <%= render '/layouts/logged_in_layout' %>
-  <% else %>
-    <body class="bg-dark">
+  <body class="bg-dark">
     <%= yield %>
-    </body>
-  <% end %>
+  </body>
 </html>
