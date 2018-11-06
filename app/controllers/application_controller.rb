@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   include ExceptionHandler
 
-  layout :application_layout
-
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  layout :application_layout
 
   def after_sign_in_path_for(resource)
     if resource.admin?
@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
   private
 
   def application_layout
-    @current_user.nil? ? 'application' : 'logged_in_layout'
+    if current_user
+      'logged_in_layout'
+    else
+      'application'
+    end
   end
 end
