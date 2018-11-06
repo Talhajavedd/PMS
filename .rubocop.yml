@@ -21,7 +21,15 @@ Style/Documentation:
   Enabled: false
 
 Style/ClassAndModuleChildren:
+  Exclude:
+    - 'config/application.rb'
+    - 'app/channels/application_cable/connection.rb'
+    - 'app/channels/application_cable/channel.rb'
   EnforcedStyle: compact
+
+Style/NumericLiterals:
+  Exclude:
+    - 'db/schema.rb'
 
 Metrics/AbcSize:
   Enabled: false

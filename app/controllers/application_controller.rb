@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def authenticate_manager(url)
-    return unless current_user.manager?
+    return if current_user.manager?
 
     flash[:alert] = 'You should be a manager to access this page'
     redirect_to url

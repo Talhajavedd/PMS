@@ -6,7 +6,7 @@ class Admin::AdminsController < ApplicationController
   private
 
   def authenticate_admin
-    return unless current_user.admin?
+    return if current_user.admin?
 
     flash[:alert] = 'You should be an admin to access this page'
     redirect_to root_path
