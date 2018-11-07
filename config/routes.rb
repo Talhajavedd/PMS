@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-  resources :projects do
-    get 'delete'
-    resources :payments do
-      get 'delete'
-    end
-    resources :time_logs do
-      get 'delete'
-    end
-  end
   root 'projects#index'
   devise_for :users
   namespace :admin do
@@ -29,6 +20,15 @@ Rails.application.routes.draw do
       resources :time_logs do
         get 'delete'
       end
+    end
+  end
+  resources :projects do
+    get 'delete'
+    resources :payments do
+      get 'delete'
+    end
+    resources :time_logs do
+      get 'delete'
     end
   end
   resources :clients do
