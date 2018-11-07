@@ -1,0 +1,6 @@
+<% if @payment.persisted? %>
+  $('#myModal').modal('hide');
+  $('.flashMessages').html("<%= j render 'layouts/flash_messages', flash: flash %>");
+<% else %>
+  $("#errors").html("<%= j render 'layouts/error_messages', object: @payment %>");
+<% end %>

@@ -18,13 +18,8 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = @project.payments.new(payment_params)
-
-    respond_to do |format|
-      if @payment.save
-        format.html { redirect_to projects_path, notice: 'Payment succesfully created!' }
-      else
-        format.js { render action: 'new' }
-      end
+    if @payment.save
+      flash.now[:notice] = 'Payment succesfully created!'
     end
   end
 

@@ -15,13 +15,8 @@ class Admin::TimeLogsController < Admin::AdminsController
 
   def create
     @time_log = @project.time_logs.new(time_log_params)
-
-    respond_to do |format|
-      if @time_log.save
-        format.html { redirect_to admin_projects_path, notice: 'Time added succesfully created!' }
-      else
-        format.js { render action: 'new' }
-      end
+    if @time_log.save
+      flash.now[:notice] = 'Time added succesfully created!'
     end
   end
 
