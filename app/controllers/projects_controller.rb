@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action only: %i[delete new create edit update destroy] do
-    authenticate_manager(projects_path)
+    authenticate_manager
   end
 
   def index

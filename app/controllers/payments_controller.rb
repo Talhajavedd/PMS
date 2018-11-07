@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   before_action do
     set_project
-    authenticate_manager(root_path)
+    authenticate_manager
   end
   before_action :set_payment, only: %i[edit update destroy]
 

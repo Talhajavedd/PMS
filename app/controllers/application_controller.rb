@@ -16,11 +16,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def authenticate_manager(url)
+  def authenticate_manager
     return if current_user.manager?
 
     flash[:alert] = 'You should be a manager to access this page'
-    redirect_to url
+    redirect_to root_path
   end
 
   def configure_permitted_parameters
