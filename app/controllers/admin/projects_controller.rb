@@ -2,7 +2,7 @@ class Admin::ProjectsController < Admin::AdminsController
   before_action :set_project, only: %i[show edit update destroy]
 
   def index
-    @projects = Project.all
+    @projects = Project.all.includes(:client)
   end
 
   def show; end

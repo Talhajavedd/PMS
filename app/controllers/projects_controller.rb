@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @projects = Project.all.includes(:client)
   end
 
   def show; end
