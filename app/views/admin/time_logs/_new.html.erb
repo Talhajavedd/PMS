@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body">
   <div class="card-body">
-    <%= form_for [:admin, @project, @time_log], :remote => true do |f| %>
+    <%= form_for [:admin, @project, @time_log], remote: true do |f| %>
       <div id="errors"></div>
       <div class="form-group">
         <div class="form-label-group">
@@ -17,7 +17,7 @@
       <div class="form-group">
         <div class="form-label-group">
           Hours:
-          <%= f.time_select :hours, {:default => {:hour => '00', :minute => '00'}} %>
+          <%= f.time_select :hours, { default: { hour: '00', minute: '00'} } %>
         </div>
       </div>
       <%= f.submit class: "btn btn-dark btn-block" %>  

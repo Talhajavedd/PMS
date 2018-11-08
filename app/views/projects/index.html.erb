@@ -35,12 +35,12 @@
               <td><%= project.client.name %></td>
               <% if current_user.manager? %>
                 <td>
-                  <%= link_to 'Add Payment', new_project_payment_path(project),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myModal', class: 'btn btn-outline-success'}  %>
+                  <%= link_to 'Add Payment', new_project_payment_path(project),  { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-outline-success'}  %>
                 </td>
                 <td><%= link_to 'Show Payments', project_payments_path(project), class: "btn btn-outline-success" %></td>
               <% end %>
               <td>
-                <%= link_to 'Add Time Logs', new_project_time_log_path(project),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myModal', class: 'btn btn-outline-primary'}  %>
+                <%= link_to 'Add Time Logs', new_project_time_log_path(project),  { remote: true, data: { toggle: 'modal',target: '#myModal' }, class: 'btn btn-outline-primary'}  %>
               </td>
               <td><%= link_to 'Show Time Logs', project_time_logs_path(project), class: "btn btn-outline-primary" %></td>
               <td><%= link_to 'Show', project_path(project), class: "btn btn-dark" %></td>
