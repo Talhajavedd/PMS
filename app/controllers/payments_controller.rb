@@ -18,9 +18,7 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = @project.payments.new(payment_params)
-    if @payment.save
-      flash.now[:notice] = 'Payment succesfully created!'
-    end
+    flash.now[:notice] = 'Payment succesfully created!' if @payment.save
   end
 
   def update

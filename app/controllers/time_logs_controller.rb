@@ -15,9 +15,7 @@ class TimeLogsController < ApplicationController
 
   def create
     @time_log = @project.time_logs.new(time_log_params)
-    if @time_log.save
-      flash.now[:notice] =  'Time added succesfully created!'
-    end
+    flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
   end
 
   def update
