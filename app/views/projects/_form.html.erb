@@ -9,7 +9,7 @@
     </div>
     <div class="text-right mb-4">
       Choose Client:
-      <%= collection_select(:project, :client_id, Client.all, :id, :name, {}, {class: "btn btn-secondary dropdown-toggle ml-2"}) %>
+      <%= collection_select(:project, :client_id, @clients, :id, :name, {}, {class: "btn btn-secondary dropdown-toggle ml-2"}) %>
     </div>
     <%= f.submit class: "btn btn-dark btn-block" %>
   <% end %>

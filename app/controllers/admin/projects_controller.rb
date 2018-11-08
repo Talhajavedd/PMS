@@ -1,4 +1,5 @@
 class Admin::ProjectsController < Admin::AdminsController
+  before_action :set_client, only: %i[new create edit update]
   before_action :set_project, only: %i[show edit update destroy]
 
   def index
@@ -44,6 +45,10 @@ class Admin::ProjectsController < Admin::AdminsController
 
   def set_project
     @project = Project.find(params[:id])
+  end
+
+  def set_client
+    @clients = Client.all
   end
 
   def project_params
