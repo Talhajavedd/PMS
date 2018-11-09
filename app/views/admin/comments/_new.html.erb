@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Recent Comments</h5>
+  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div id="load-comments">
+    <%= render 'recent_comments' %>
+  </div>
+  <div class="mt-3">
+    <%= form_for [:admin, @commentable, @comment], :remote => true do |f| %>
+      <div id="errors"></div>
+      <div class="form-group">
+        <div class="form-label-group">
+          <%= f.text_area :body, id: "commentbox", class: "form-control" , placeholder: 'Write comment...' %>
+        </div>
+      </div>
+      <%= f.submit class: "btn btn-dark btn-block" %>
+    <% end %>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+</div>

@@ -1,0 +1,26 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span">Comment</span>
+  </li>
+  <li class="breadcrumb-item active">Edit</li>
+</ol>
+
+<h2>Edit Comment</h2>
+<hr>
+
+<div class="container">
+  <div class="card card-register mx-auto mt-5">
+    <div class="card-header">Update your Comment</div>
+    <div class="card-body">
+      <%= form_for [:admin, @commentable, @comment] do |f| %>
+        <%= render '/layouts/error_messages', object: @comment %>
+        <div class="form-group">
+          <div class="form-label-group">
+            <%= f.text_area :body, id: "commentbox", class: "form-control" , placeholder: 'Write comment...' %>
+          </div>
+        </div>
+        <%= f.submit class: "btn btn-dark btn-block" %>
+      <% end %>
+    </div>
+  </div>
+</div>

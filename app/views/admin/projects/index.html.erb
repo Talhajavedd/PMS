@@ -18,14 +18,14 @@
           <tr>
             <th>Name</th>
             <th>Client</th>
-            <th colspan="7"></th>
+            <th colspan="8"></th>
           </tr>
         </thead>
         <tfoot>
           <tr>
             <th>Name</th>
             <th>Client</th>
-            <th colspan="7"></th>
+            <th colspan="8"></th>
           </tr>
         </tfoot>
         <tbody>
@@ -41,6 +41,11 @@
                 <%= link_to 'Add Time Logs', new_admin_project_time_log_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-outline-primary'}  %>
               </td>
               <td><%= link_to 'Show Time Logs', admin_project_time_logs_path(project), class: "btn btn-outline-primary" %></td>
+              <td>
+                <%= link_to new_admin_project_comment_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-primary'} do %>
+                  <i class="fas fa-fw fa-comments"></i>
+                <% end %>
+              </td>
               <td><%= link_to 'Edit', edit_admin_project_path(project), class: "btn btn-dark" %></td>
               <td><%= link_to 'Show', admin_project_path(project), class: "btn btn-dark" %></td>
               <td><%= link_to "Delete", admin_project_delete_path(project), remote: true, class: "btn btn-danger" %></td>

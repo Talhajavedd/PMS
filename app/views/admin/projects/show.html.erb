@@ -5,15 +5,15 @@
   <li class="breadcrumb-item active">Details</li>
 </ol>
 
-<h2>Project Details</h2>
+<h2><%= @project.name %></h2>
 <hr>
 
 <div class="container">
   <div class="card card-register mx-auto mt-5">
     <div class="card-body text-center">
       <p>
-        <span class="font-weight-light font-italic"> Project name: </span>
-        <span class="font-weight-bold"><%= @project.name %></span>
+        <span class="font-weight-light font-italic">Total Payments </span>
+        <span class="font-weight-bold"></span>
       </p>
       <p>
         <span class="font-weight-light font-italic"> Project's client name: </span>
@@ -21,5 +21,48 @@
       </p>
     </div>
   </div>
-</div>
 
+  <ul class="nav nav-tabs nav-fill">
+      <li>
+          <a class="nav-link active" data-toggle="tab" href="#comments">Comments</a>
+      </li>
+      <li>
+          <a class="nav-link" data-toggle="tab" href="#tab2">Time Logs</a>
+      </li>
+  </ul>
+  <div class="tab-content my-3">
+    <div class="tab-pane fade show active p-10" id="comments" role="tabpanel">
+      <div class="row">
+        <div class="col-12">
+          <% if @comments.any? %>
+            <div class="card rounded-0">
+              <% @comments.each do |comment| %>
+                <div class="card-header p-0">
+                  <div class="row mx-1 mt-2">
+                    <div class="col-6 font-weight-bold small">  <%= comment.user.username %></div>
+                    <div class="col-6 small">
+                      <div class="row float-right">
+                        <p class="pr-2"><%= comment.created_at.to_date %>
+                          <%= link_to edit_admin_project_comment_path(@project, comment), class: "ml-2" do %>
+                            <i class="fas fa-edit"></i>
+                          <% end %>
+                          <%= link_to admin_project_comment_path(@project, comment), class: "ml-2", method: :delete, data: { confirm: 'Are you sure?' } do %>
+                            <i class="fas fa-trash"></i>
+                          <% end %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body small">
+                  <%= comment.body %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tab2" role="tabpanel">tab 2 content..</div>
+  </div>
+</div>

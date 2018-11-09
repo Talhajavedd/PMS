@@ -1,0 +1,15 @@
+<% if @comments.any? %>
+  <div class="card rounded-0">
+    <% @comments.each do |comment| %>
+      <div class="card-header p-0">
+        <div class="row mx-1 my-1">
+          <div class="col-6 font-weight-bold small">  <%= comment.user.username %></div>
+          <div class="col-6 small text-right"><%= comment.created_at.to_date %></div>
+        </div>
+      </div>
+      <div class="card-body small p-0 mx-4 my-2"><%= comment.body %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to 'View all comments', admin_project_path(@commentable), class: "btn btn-info btn-block mt-3" %>
+<% end %>
