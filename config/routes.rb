@@ -30,10 +30,13 @@ Rails.application.routes.draw do
     resources :time_logs do
       get 'delete'
     end
+    resources :comments do
+    end
   end
   resources :clients do
     get 'delete'
   end
+
   match '*path', to: 'exceptions#catch_404', via: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
