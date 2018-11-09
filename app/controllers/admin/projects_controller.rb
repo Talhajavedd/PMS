@@ -6,7 +6,9 @@ class Admin::ProjectsController < Admin::AdminsController
     @projects = Project.all.includes(:client)
   end
 
-  def show; end
+  def show
+    @comments = @project.comments
+  end
 
   def new
     @project = Project.new
