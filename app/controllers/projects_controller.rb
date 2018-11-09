@@ -9,7 +9,9 @@ class ProjectsController < ApplicationController
     @projects = Project.all.includes(:client)
   end
 
-  def show; end
+  def show
+    @comments = @project.comments.all
+  end
 
   def new
     @project = Project.new
