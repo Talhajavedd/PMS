@@ -2,6 +2,7 @@ class Project < ApplicationRecord
   belongs_to :client
   has_many :payments, dependent: :destroy
   has_many :time_logs, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
 
   VALID_NAME_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
 
