@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       resources :time_logs do
         get 'delete'
       end
+      resources :comments do
+      end
     end
   end
   resources :projects do
