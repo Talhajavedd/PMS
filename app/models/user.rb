@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
+  has_one :attachment, as: :attachable, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,6 +8,8 @@ class User < ApplicationRecord
 
   validate :validate_username
   validates :username, presence: true, uniqueness: { case_sensitive: false }
+
+  accepts_nested_attributes_for :attachment
 
   ADMIN = 'admin'.freeze
 
