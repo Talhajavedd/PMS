@@ -1,6 +1,25 @@
 <div class="card-body">
-  <%= form_for [:admin, @user] do |f| %>
-
+  <%= form_for [:admin, @user], html: { multipart: true } do |f| %>
+    <% unless @user.attachment.nil? %>
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 text-center">
+          <%= image_tag @user.attachment.avatar.url, class: "rounded-circle img-fluid" %>
+        </div>
+        <div class="col-4"></div>
+      </div>
+    <%else%>
+      <% @user.build_attachment %>
+    <% end %>
+    <div class="row my-4">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <%= f.fields_for :attachment do |a| %>
+          <%= a.file_field :avatar %>
+        <% end %>
+      </div>
+      <div class="col-4"></div>
+    </div>
     <div class="form-group">
       <div class="form-label-group">
         <%= f.text_field :username, class: "form-control", placeholder: 'Username' %>
@@ -33,7 +52,7 @@
       </div>
     </div>
     <div class="dropdown">
-      <%= f.select(:role, User.roles_except_admin.keys.map {|role| [role.titleize,role]}, {}, { class: "btn btn-secondary dropdown-toggle" }) %><br/><br/>
+      <%= f.select(:role, User.roles_except_admin.keys.map {|role| [role.titleize,role]}, {}, { class: "btn btn-secondary dropdown-toggle mb-3" }) %>
     </div>
     <%= f.submit class: "btn btn-dark btn-block" %>
   <% end %>

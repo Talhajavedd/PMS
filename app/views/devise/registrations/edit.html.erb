@@ -8,14 +8,31 @@
 <h2>Update my Info</h2>
 <hr>
 
-<div class="container">
+<div class="container mb-4">
   <div class="card card-register mx-auto mt-5">
     <div class="card-header">Info</div>
       <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
           <%= devise_error_messages! %>
-          
+          <% unless @user.attachment.nil? %>
+            <div class="row"><div class="col-4"></div>
+              <div class="col-4 text-center">
+                <%= image_tag @user.attachment.avatar.url, class: "rounded-circle img-fluid" %><div class="col-4"></div>
+              </div>
+            </div>
+          <%end%>
+          <% if resource.attachment.nil?%>
+            <% resource.build_attachment %>
+          <% end %>
+            <div class="row my-4">
+              <div class="col-4"></div>
+              <div class="col-4">
+                <%= f.fields_for :attachment do |a| %>
+                  <%= a.file_field :avatar %>
+                <% end %>
+              </div>
+              <div class="col-4"></div>
+            </div>
           <div class="form-group">
             <div class="form-label-group">
               <%= f.text_field :username, class: "form-control", placeholder: 'Username' %>
@@ -62,6 +79,3 @@
       </div>
   </div>
 </div>
-<br/><br/>
-
-
