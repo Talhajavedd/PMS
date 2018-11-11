@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
 
   def show
     @comments = @project.comments.all
+    @attachments = @project.attachments
   end
 
   def new
@@ -57,6 +58,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :client_id)
+    params.require(:project).permit(:name, :client_id, attachments_attributes: [:id, :avatar, :_destroy])
   end
 end
