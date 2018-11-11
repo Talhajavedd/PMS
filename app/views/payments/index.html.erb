@@ -1,0 +1,47 @@
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span">Payment</span>
+  </li>
+  <li class="breadcrumb-item active">Index</li>
+</ol>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fas fa-table"></i>
+    Listing <%= @project_name %> Payments
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Created at</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Amount</th>
+            <th>Created at</th>
+            <th colspan="2"></th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% @payments.each do |payment| %>
+            <tr>
+              <td><%= payment.amount %></td>
+              <td><%= payment.created_at.to_date %></td>
+              <td><%= link_to 'Edit', edit_project_payment_path(@project, payment), class: "btn btn-dark" %></td>
+              <td><%= link_to "Delete", project_payment_delete_path(@project,payment), remote: true, class: "btn btn-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="destroyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>

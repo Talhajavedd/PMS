@@ -1,0 +1,45 @@
+<% if current_user.admin? %>
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item">
+      <%= link_to admin_projects_path, class: "nav-link" do %>
+        <i class="fas fa-fw fa-project-diagram"></i> Projects
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to admin_clients_path, class: "nav-link" do %>
+        <i class="fas fa-fw fa-user-tie"></i> Clients
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to admin_users_path, class: "nav-link" do %>
+        <i class="fas fa-fw fa-users"></i> Users
+      <% end %>
+    </li>
+  </ul>
+<% elsif current_user.manager? %>
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item">
+      <%= link_to root_path, class: "nav-link" do %>
+        <i class="fas fa-project-diagram"></i> Projects
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to clients_path, class: "nav-link" do %>
+        <i class="fas fa-fw fa-user-tie"></i> Clients
+      <% end %>
+    </li>
+  </ul>
+<% else current_user.user? %>
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item">
+      <%= link_to root_path, class: "nav-link" do %>
+        <i class="fas fa-project-diagram"></i> Projects
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to clients_path, class: "nav-link" do %>
+        <i class="fas fa-fw fa-user-tie"></i> Clients
+      <% end %>
+    </li>
+  </ul>
+<% end -%>

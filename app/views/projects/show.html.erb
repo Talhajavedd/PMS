@@ -1,0 +1,26 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span">Projects</span>
+  </li>
+  <li class="breadcrumb-item active">Details</li>
+</ol>
+
+<h2>Project Details</h2>
+<hr>
+
+
+<div class="container">
+  <div class="card card-register mx-auto mt-5">
+    <div class="card-body text-center">
+      <p>
+        <span class="font-weight-light font-italic"> Project name: </span>
+        <span class="font-weight-bold"><%= @project.name %></span>
+      </p>
+      <p>
+        <span class="font-weight-light font-italic"> Project's client name: </span>
+        <span class="font-weight-bold"><%= @project.client.name %></span>
+      </p>
+    </div>
+  </div>
+</div>
+

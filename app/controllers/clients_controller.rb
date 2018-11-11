@@ -1,27 +1,24 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_manager, only: [:new, :edit, :update, :destroy]
-  before_action :authenticate_admin, only: [:index]
+  before_action :set_client, only: %i[show edit update destroy]
+  before_action :authenticate_manager, only: %i[delete new create edit update destroy]
 
   def index
     @clients = Client.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @client = Client.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @client = Client.new(client_params)
 
     if @client.save
-      redirect_to clients_path(@client), notice: "Client succesfully created!"
+      redirect_to clients_path(@client), notice: 'Client succesfully created!'
     else
       render 'new'
     end
@@ -40,19 +37,11 @@ class ClientsController < ApplicationController
     redirect_to clients_path
   end
 
-  private
-  def authenticate_manager
-    unless current_user.role == "manager"
-      flash[:error] = "You should be a manager to access this page"
-      redirect_to clients_path
-    end
+  def delete
+    @client = Client.find(params[:client_id])
   end
 
-  def authenticate_admin
-    if current_user.admin?
-      redirect_to admin_clients_path
-    end
-  end
+  private
 
   def set_client
     @client = Client.find(params[:id])

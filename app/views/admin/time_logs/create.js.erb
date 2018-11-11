@@ -1,0 +1,6 @@
+<% if @time_log.persisted? %>
+  $('#myModal').modal('hide');
+  $('.flash-messages').html("<%= j render 'layouts/flash_messages', flash: flash %>");
+<% else %>
+  $("#errors").html("<%= j render 'layouts/error_messages', object: @time_log %>");
+<% end %>

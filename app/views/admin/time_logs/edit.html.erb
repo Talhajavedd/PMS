@@ -1,0 +1,34 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span">Time Logs</span>
+  </li>
+  <li class="breadcrumb-item active">Edit</li>
+</ol>
+
+<h2>Update Time Log</h2>
+<hr>
+
+<div class="container">
+  <div class="card card-register mx-auto mt-5">
+    <div class="card-header">Update Time Log Info</div>
+      <div class="card-body">
+        <%= form_for [:admin, @project, @time_log] do |f| %>
+
+          <div class="form-group">
+            <div class="form-label-group">
+              Date:
+              <%= f.date_select :date %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              Hours:
+              <%= f.time_select :hours %>
+            </div>
+          </div>
+          <%= f.submit class: "btn btn-dark btn-block" %>
+        <% end %>
+      </div>
+  </div>
+</div>
+<br/><br/>

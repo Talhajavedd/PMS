@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  date: 2018-11-05 02:59:46
+  hours: 9.99
+
+two:
+  project: two
+  date: 2018-11-05 02:59:46
+  hours: 9.99
