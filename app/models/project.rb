@@ -3,6 +3,9 @@ class Project < ApplicationRecord
   has_many :payments, dependent: :destroy
   has_many :time_logs, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :attachments, as: :attachable, dependent: :destroy
+
+  accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
 
   VALID_NAME_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
 

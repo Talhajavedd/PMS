@@ -11,6 +11,10 @@ class Attachment < ApplicationRecord
       unless avatar_content_type.match(/\Aimage\/.*\z/)  
         errors.add(:avatar_content_type, "must be an image")
       end
+    elsif attachable_type == "Project"
+      unless ["application/pdf"].include? avatar_content_type  
+        errors.add(:avatar_content_type, " (attachment) must be an image or pdf")
+      end
     end
   end
 end
