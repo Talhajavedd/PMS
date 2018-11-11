@@ -1,0 +1,10 @@
+<div class='nested-fields'>
+  <% if f.object.avatar.exists? %>
+    <%= link_to f.object.avatar_file_name, f.object.avatar.url(:original) %>
+  <% else %>
+    <div class="field">
+      <%= f.file_field :avatar %>
+    </div>
+  <% end %>
+  <%= link_to_remove_association "remove attachment", f, class: "btn btn-warning my-3" %>
+</div>

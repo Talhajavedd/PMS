@@ -19,6 +19,9 @@
         <span class="font-weight-light font-italic"> Project's client name: </span>
         <span class="font-weight-bold"><%= @project.client.name %></span>
       </p>
+      <% @attachments.each do |attachment| %>
+        <%= link_to attachment.avatar_file_name, attachment.avatar.url(:original) %>
+      <% end %>
     </div>
   </div>
 
