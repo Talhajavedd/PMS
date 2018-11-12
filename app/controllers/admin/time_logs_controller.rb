@@ -15,6 +15,7 @@ class Admin::TimeLogsController < Admin::AdminsController
 
   def create
     @time_log = @project.time_logs.new(time_log_params)
+    @time_log.user_id = current_user.id
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
   end
 
