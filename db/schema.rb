@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_10_120904) do
+ActiveRecord::Schema.define(version: 2018_11_12_093918) do
 
   create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "avatar_file_name"
@@ -60,13 +60,22 @@ ActiveRecord::Schema.define(version: 2018_11_10_120904) do
     t.index ["name"], name: "index_projects_on_name", unique: true
   end
 
+  create_table "projects_users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["project_id", "user_id"], name: "index_projects_users_on_project_id_and_user_id"
+    t.index ["user_id", "project_id"], name: "index_projects_users_on_user_id_and_project_id"
+  end
+
   create_table "time_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.datetime "date", null: false
     t.decimal "hours", precision: 4, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["project_id"], name: "index_time_logs_on_project_id"
+    t.index ["user_id"], name: "index_time_logs_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,4 +98,5 @@ ActiveRecord::Schema.define(version: 2018_11_10_120904) do
   add_foreign_key "payments", "projects"
   add_foreign_key "projects", "clients"
   add_foreign_key "time_logs", "projects"
+  add_foreign_key "time_logs", "users"
 end

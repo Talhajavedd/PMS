@@ -1,5 +1,6 @@
 class TimeLog < ApplicationRecord
   belongs_to :project
+  belongs_to :user
 
   validates :hours, presence: true, numericality: { greater_than: 0, message: 'or minutes should be greater than 0' }
   validates :date, presence: true
