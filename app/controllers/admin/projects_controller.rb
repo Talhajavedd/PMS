@@ -1,6 +1,7 @@
 class Admin::ProjectsController < Admin::AdminsController
   before_action :set_client, only: %i[new create edit update]
   before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_project_users, only: %i[new edit]
 
   def index
     @projects = Project.all.includes(:client)
@@ -54,7 +55,11 @@ class Admin::ProjectsController < Admin::AdminsController
     @clients = Client.all
   end
 
+  def set_project_users
+    @users = User.where(role: "user")
+  end
+
   def project_params
-    params.require(:project).permit(:name, :client_id, attachments_attributes: [:id, :avatar, :_destroy])
+    params.require(:project).permit(:name, :client_id, user_ids: [], attachments_attributes: [:id, :avatar, :_destroy])
   end
 end
