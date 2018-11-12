@@ -1,15 +1,23 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_manager, only: %i[delete new create edit update destroy]
+  before_action :set_project_users, only: %i[new edit]
   before_action :set_client, only: %i[new create edit update]
-  before_action :set_project, only: %i[show edit update destroy]
-  before_action only: %i[delete new create edit update destroy] do
-    authenticate_manager
-  end
+  before_action :set_project, only: %i[edit update destroy]
 
   def index
-    @projects = Project.all.includes(:client)
+    if current_user.user?
+      @projects = current_user.projects.includes(:client)
+    else
+      @projects = Project.all.includes(:client)
+    end
   end
 
   def show
+    if current_user.user?
+      @project = current_user.projects.find(params[:id])
+    else
+      @project = Project.find(params[:id])
+    end
     @comments = @project.comments.all
     @attachments = @project.attachments
   end
@@ -57,7 +65,11 @@ class ProjectsController < ApplicationController
     @clients = Client.all
   end
 
+  def set_project_users
+    @users = User.where(role: "user")
+  end
+
   def project_params
-    params.require(:project).permit(:name, :client_id, attachments_attributes: [:id, :avatar, :_destroy])
+    params.require(:project).permit(:name, :client_id, user_ids: [],attachments_attributes: [:id, :avatar, :_destroy])
   end
 end

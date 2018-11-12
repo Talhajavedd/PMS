@@ -22,6 +22,10 @@
           Choose Client:
           <%= collection_select(:project, :client_id, @clients, :id, :name, {}, {class: "btn btn-secondary dropdown-toggle ml-2"}) %>
         </div>
+        <div class="float-right mb-4">
+          Users:
+          <%= f.collection_select(:user_ids, @users, :id, :username, {}, {multiple: true, class: "chosen-select btn btn-info"}) %>
+        </div>
       </div>
     </div>
     <%= f.submit class: "btn btn-dark btn-block" %>
