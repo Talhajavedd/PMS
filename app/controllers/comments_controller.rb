@@ -33,11 +33,23 @@ class CommentsController < ApplicationController
 
   def set_commentable
     resource, id = request.path.split('/')[1, 2]
-    @commentable = resource.singularize.classify.constantize.find(id)
+    if resource == 'projects'
+      set_project
+    else
+      @commentable = resource.singularize.classify.constantize.find(id)
+    end
+  end
+
+  def set_project
+    if current_user.user?
+      @commentable = current_user.projects.find(params[:project_id])
+    else
+      @commentable = Project.find(params[:project_id])
+    end
   end
 
   def set_comment
-    @comment = @commentable.comments.find(params[:id])
+    @comment = @commentable.comments.where(user_id: current_user.id).find(params[:id])
   end
 
   def comment_params
