@@ -39,7 +39,7 @@ gem 'bootstrap', '~> 4.1.3'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'jquery-easing-rails', '~> 0.0.2'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
-
+gem 'chosen-rails', '~> 1.5', '>= 1.5.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

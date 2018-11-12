@@ -19,5 +19,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require cocoon
+//= require chosen-jquery
+//= require scaffold
 //= require_tree .
 //= require_self
