@@ -3,11 +3,11 @@ class TimeLogsController < ApplicationController
   before_action :set_time_log, only: %i[edit update destroy]
 
   def index
-    if current_user.user?
-      @time_logs = @project.time_logs.where(user_id: current_user.id).all
-    else
-      @time_logs = @project.time_logs.all
-    end
+    @time_logs = if current_user.user?
+                   @project.time_logs.where(user_id: current_user.id).all
+                 else
+                   @project.time_logs.all
+                 end
     @project_name = @project.name
   end
 
@@ -44,19 +44,19 @@ class TimeLogsController < ApplicationController
   private
 
   def set_project
-    if current_user.user?
-      @project = current_user.projects.find(params[:project_id])
-    else
-      @project = Project.find(params[:project_id])
-    end
+    @project = if current_user.user?
+                 current_user.projects.find(params[:project_id])
+               else
+                 Project.find(params[:project_id])
+               end
   end
 
   def set_time_log
-    if current_user.user?
-      @time_log = current_user.time_logs.where(project_id: @project.id).find(params[:id])
-    else
-      @time_log = TimeLog.find(params[:id])
-    end 
+    @time_log = if current_user.user?
+                  current_user.time_logs.where(project_id: @project.id).find(params[:id])
+                else
+                  TimeLog.find(params[:id])
+                end
   end
 
   def time_log_params

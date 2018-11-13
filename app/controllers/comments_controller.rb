@@ -41,11 +41,11 @@ class CommentsController < ApplicationController
   end
 
   def set_project
-    if current_user.user?
-      @commentable = current_user.projects.find(params[:project_id])
-    else
-      @commentable = Project.find(params[:project_id])
-    end
+    @commentable = if current_user.user?
+                     current_user.projects.find(params[:project_id])
+                   else
+                     Project.find(params[:project_id])
+                   end
   end
 
   def set_comment

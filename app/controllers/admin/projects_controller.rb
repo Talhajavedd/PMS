@@ -56,10 +56,10 @@ class Admin::ProjectsController < Admin::AdminsController
   end
 
   def set_project_users
-    @users = User.where(role: "user")
+    @users = User.where(role: 'user')
   end
 
   def project_params
-    params.require(:project).permit(:name, :client_id, user_ids: [], attachments_attributes: [:id, :avatar, :_destroy])
+    params.require(:project).permit(:name, :client_id, user_ids: [], attachments_attributes: %i[id avatar _destroy])
   end
 end

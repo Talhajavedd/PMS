@@ -5,19 +5,19 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[edit update destroy]
 
   def index
-    if current_user.user?
-      @projects = current_user.projects.includes(:client)
-    else
-      @projects = Project.all.includes(:client)
-    end
+    @projects = if current_user.user?
+                  current_user.projects.includes(:client)
+                else
+                  Project.all.includes(:client)
+                end
   end
 
   def show
-    if current_user.user?
-      @project = current_user.projects.find(params[:id])
-    else
-      @project = Project.find(params[:id])
-    end
+    @project = if current_user.user?
+                 current_user.projects.find(params[:id])
+               else
+                 Project.find(params[:id])
+               end
     @comments = @project.comments.all
     @attachments = @project.attachments
   end
@@ -34,6 +34,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to projects_path(@project), notice: 'Project succesfully created!'
     else
+      set_project_users
       render 'new'
     end
   end
@@ -42,6 +43,7 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       redirect_to project_path(@project), notice: 'Project succesfully updated!'
     else
+      set_project_users
       render 'edit'
     end
   end
@@ -66,10 +68,10 @@ class ProjectsController < ApplicationController
   end
 
   def set_project_users
-    @users = User.where(role: "user")
+    @users = User.where(role: 'user')
   end
 
   def project_params
-    params.require(:project).permit(:name, :client_id, user_ids: [],attachments_attributes: [:id, :avatar, :_destroy])
+    params.require(:project).permit(:name, :client_id, user_ids: [], attachments_attributes: %i[id avatar _destroy])
   end
 end
