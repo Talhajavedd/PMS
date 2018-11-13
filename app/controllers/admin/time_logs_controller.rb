@@ -3,7 +3,7 @@ class Admin::TimeLogsController < Admin::AdminsController
   before_action :set_time_log, only: %i[edit update destroy]
 
   def index
-    @time_logs = @project.time_logs.all
+    @time_logs = @project.time_logs.includes(:user)
     @project_name = @project.name
   end
 

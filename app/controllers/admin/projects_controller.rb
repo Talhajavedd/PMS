@@ -8,7 +8,7 @@ class Admin::ProjectsController < Admin::AdminsController
   end
 
   def show
-    @comments = @project.comments
+    @comments = @project.comments.includes(:user)
     @attachments = @project.attachments
   end
 

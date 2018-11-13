@@ -4,9 +4,9 @@ class TimeLogsController < ApplicationController
 
   def index
     @time_logs = if current_user.user?
-                   @project.time_logs.where(user_id: current_user.id).all
+                   @project.time_logs.where(user_id: current_user.id).includes(:user)
                  else
-                   @project.time_logs.all
+                   @project.time_logs.includes(:user)
                  end
     @project_name = @project.name
   end

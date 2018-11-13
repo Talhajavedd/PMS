@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
                else
                  Project.find(params[:id])
                end
-    @comments = @project.comments.all
+    @comments = @project.comments.all.includes(:user)
     @attachments = @project.attachments
   end
 
