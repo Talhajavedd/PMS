@@ -3,16 +3,14 @@ class TimeLogsController < ApplicationController
   before_action :set_time_log, only: %i[edit update destroy]
 
   def index
-    @time_logs = if current_user.user?
-                   @project.time_logs.where(user_id: current_user.id).includes(:user)
-                 else
-                   @project.time_logs.includes(:user)
-                 end
+    @time_logs = @project.time_logs.includes(:user)
+    authorize TimeLog
     @project_name = @project.name
   end
 
   def new
     @time_log = @project.time_logs.new
+    authorize @time_log
   end
 
   def edit; end
@@ -20,6 +18,7 @@ class TimeLogsController < ApplicationController
   def create
     @time_log = @project.time_logs.new(time_log_params)
     @time_log.user_id = current_user.id
+    authorize @time_log
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
   end
 
@@ -44,19 +43,13 @@ class TimeLogsController < ApplicationController
   private
 
   def set_project
-    @project = if current_user.user?
-                 current_user.projects.find(params[:project_id])
-               else
-                 Project.find(params[:project_id])
-               end
+    @project = Project.find(params[:project_id])
+    authorize @project, :show?
   end
 
   def set_time_log
-    @time_log = if current_user.user?
-                  current_user.time_logs.where(project_id: @project.id).find(params[:id])
-                else
-                  TimeLog.find(params[:id])
-                end
+    @time_log = TimeLog.find(params[:id])
+    authorize @time_log
   end
 
   def time_log_params
