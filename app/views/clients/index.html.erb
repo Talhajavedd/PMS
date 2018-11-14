@@ -34,15 +34,17 @@
               <td><%= client.name %></td>
               <td><%= client.company %></td>
               <td><%= link_to 'Show', client_path(client), class: "btn btn-dark" %></td>
-              <% if current_user.manager? %>
+              <% if policy(client).edit? %>
                 <td><%= link_to 'Edit', edit_client_path(client), class: "btn btn-dark" %></td>
+              <% end %>
+              <% if policy(client).destroy? %>
               <td><%= link_to "Delete", client_delete_path(client), remote: true, class: "btn btn-danger" %></td>
               <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
-      <% if current_user.manager? %>
+      <% if policy(@clients).new? %>
         <div class="text-right">
           <%= link_to 'New Client', new_client_path, class: "btn btn-dark" %>
         </div>

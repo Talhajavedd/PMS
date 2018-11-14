@@ -4,19 +4,21 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.all
+    authorize Client
   end
 
   def show; end
 
   def new
     @client = Client.new
+    authorize Client
   end
 
   def edit; end
 
   def create
     @client = Client.new(client_params)
-
+    authorize Client
     if @client.save
       redirect_to clients_path(@client), notice: 'Client succesfully created!'
     else
@@ -45,6 +47,7 @@ class ClientsController < ApplicationController
 
   def set_client
     @client = Client.find(params[:id])
+    authorize Client
   end
 
   def client_params
