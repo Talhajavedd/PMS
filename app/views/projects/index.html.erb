@@ -33,10 +33,12 @@
             <tr>
               <td><%= project.name %></td>
               <td><%= project.client.name %></td>
-              <% if current_user.manager? %>
+              <% if policy(project.payments).new? %>
                 <td>
                   <%= link_to 'Add Payment', new_project_payment_path(project),  { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-outline-success'}  %>
                 </td>
+              <% end %>
+              <% if policy(project.payments).index? %>
                 <td><%= link_to 'Show Payments', project_payments_path(project), class: "btn btn-outline-success" %></td>
               <% end %>
               <td>
@@ -49,8 +51,10 @@
                 <% end %>
               </td>
               <td><%= link_to 'Show', project_path(project), class: "btn btn-dark" %></td>
-              <% if current_user.manager? %>
+              <% if policy(project).edit? %>
                 <td><%= link_to 'Edit', edit_project_path(project), class: "btn btn-dark" %></td>
+              <% end %>
+              <% if policy(project).destroy? %>
                 <td><%= link_to "Delete", project_delete_path(project), remote: true, class: "btn btn-danger" %></td>
               <% end %>
             </tr>
@@ -59,7 +63,7 @@
       </table>
 
     </div>
-      <% if current_user.manager? %>
+      <% if policy(@projects).new? %>
         <div class="text-right mt-3">
           <%= link_to 'New Project', new_project_path, class: "btn btn-dark" %>
         </div>

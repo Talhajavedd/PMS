@@ -1,36 +1,27 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_manager, only: %i[delete new create edit update destroy]
   before_action :set_project_users, only: %i[new edit]
   before_action :set_client, only: %i[new create edit update]
-  before_action :set_project, only: %i[edit update destroy]
+  before_action :set_project, only: %i[show edit update destroy]
 
   def index
-    @projects = if current_user.user?
-                  current_user.projects.includes(:client)
-                else
-                  Project.all.includes(:client)
-                end
+    @projects = policy_scope(Project).includes(:client)
   end
 
   def show
-    @project = if current_user.user?
-                 current_user.projects.find(params[:id])
-               else
-                 Project.find(params[:id])
-               end
-    @comments = @project.comments.all.includes(:user)
+    @comments = @project.comments.includes(:user)
     @attachments = @project.attachments
   end
 
   def new
     @project = Project.new
+    authorize @project
   end
 
   def edit; end
 
   def create
     @project = Project.new(project_params)
-
+    authorize @project
     if @project.save
       redirect_to projects_path(@project), notice: 'Project succesfully created!'
     else
@@ -61,6 +52,7 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
+    authorize @project
   end
 
   def set_client
