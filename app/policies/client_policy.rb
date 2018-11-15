@@ -7,7 +7,7 @@ class ClientPolicy < ApplicationPolicy
     true
   end
 
-  def new
+  def new?
     user.manager?
   end
 
