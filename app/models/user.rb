@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :time_logs, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_one :attachment, as: :attachable, dependent: :destroy
+  after_save ThinkingSphinx::RealTime.callback_for(:user)
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -60,5 +61,13 @@ class User < ApplicationRecord
 
   def self.roles_except_admin
     roles.reject { |role, _| role == ADMIN }
+  end
+
+  def self.search_user(params, role_param)
+    if role_param == ""
+      search(Riddle.escape(params.to_s), without: { role: 'admin' })
+    else
+      search(Riddle.escape(params.to_s), without: { role: 'admin' }, with: { role: role_param.to_s })
+    end
   end
 end

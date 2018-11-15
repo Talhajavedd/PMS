@@ -11,6 +11,13 @@
     Listing Users
   </div>
   <div class="card-body">
+    <%= form_tag admin_users_path, method: :get do %>
+      <div class="float-right mb-2">
+        <%= select_tag(:role, options_for_select(roles_user), {include_blank: 'None', class: "btn btn-secondary dropdown-toggle mr-2"}) %>
+        <%= submit_tag "Filter Roles", class: "btn btn-info" %>
+      </div>
+      <%= text_field_tag :search, params[:search], class: "form-control mb-2", placeholder: "Search", aria: { label:"Search" } %>
+    <% end %>
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
