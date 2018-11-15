@@ -25,11 +25,7 @@ class ProjectPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.manager?
-        scope
-      else
-        scope.joins(:users).where(users: { id: user.id })
-      end
+      scope
     end
   end
 

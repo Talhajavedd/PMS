@@ -4,7 +4,7 @@ class Admin::ProjectsController < Admin::AdminsController
   before_action :set_project_users, only: %i[new edit]
 
   def index
-    @projects = Project.all.includes(:client)
+    @projects = Project.search(params[:search], include: :client)
   end
 
   def show
