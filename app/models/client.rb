@@ -1,5 +1,7 @@
 class Client < ApplicationRecord
   has_many :projects, dependent: :destroy
+  after_save ThinkingSphinx::RealTime.callback_for(:client)
+  after_save ThinkingSphinx::RealTime.callback_for(:project, [:projects])
 
   VALID_USERNAME_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
 
