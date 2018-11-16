@@ -3,7 +3,7 @@ class Admin::PaymentsController < Admin::AdminsController
   before_action :set_payment, only: %i[edit update destroy]
 
   def index
-    @payments = @project.payments.all
+    @payments = @project.payments.page(params[:page])
     @project_name = @project.name
   end
 
