@@ -33,11 +33,6 @@ class PaymentsController < ApplicationController
     redirect_to project_payments_path(@project)
   end
 
-  def delete
-    @project = Project.find(params[:project_id])
-    @payment = @project.payments.find(params[:payment_id])
-  end
-
   private
 
   def set_project

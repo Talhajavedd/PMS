@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     resources :projects do
       get 'delete'
       resources :payments do
-        get 'delete'
       end
       resources :time_logs do
       end
@@ -25,7 +24,6 @@ Rails.application.routes.draw do
   resources :projects do
     get 'delete'
     resources :payments do
-      get 'delete'
     end
     resources :time_logs do
     end
