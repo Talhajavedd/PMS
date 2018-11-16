@@ -49,6 +49,9 @@
           <% end %>
         </tbody>
       </table>
+      <div class="my-4">
+        <%= paginate @clients, class: "pagination" %>
+      </div>
       <% if policy(Client).new? %>
         <div class="text-right">
           <%= link_to 'New Client', new_client_path, class: "btn btn-dark" %>
