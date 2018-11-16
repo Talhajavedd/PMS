@@ -53,7 +53,7 @@
                 <td><%= link_to 'Edit', edit_project_path(project), class: "btn btn-dark" %></td>
               <% end %>
               <% if policy(project).destroy? %>
-                <td><%= link_to "Delete", project_delete_path(project), remote: true, class: "btn btn-danger" %></td>
+                <td><%= link_to "Delete", project_path(project), method: :delete,  data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
               <% end %>
             </tr>
           <% end %>

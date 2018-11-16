@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project_users, only: %i[new edit]
+  before_action :set_project_users, only: %i[new edit create update]
   before_action :set_client, only: %i[new create edit update]
   before_action :set_project, only: %i[show edit update destroy]
 
@@ -42,10 +42,6 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     redirect_to projects_path
-  end
-
-  def delete
-    @project = Project.find(params[:project_id])
   end
 
   private

@@ -46,7 +46,7 @@
               </td>
               <td><%= link_to 'Edit', edit_admin_project_path(project), class: "btn btn-dark" %></td>
               <td><%= link_to 'Show', admin_project_path(project), class: "btn btn-dark" %></td>
-              <td><%= link_to "Delete", admin_project_delete_path(project), remote: true, class: "btn btn-danger" %></td>
+              <td><%= link_to "Delete", admin_project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
             </tr>
           <% end %>
         </tbody>

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     end
     resources :admins, only: [:index], as: 'root'
     resources :projects do
-      get 'delete'
       resources :payments do
       end
       resources :time_logs do
@@ -22,7 +21,6 @@ Rails.application.routes.draw do
     end
   end
   resources :projects do
-    get 'delete'
     resources :payments do
     end
     resources :time_logs do

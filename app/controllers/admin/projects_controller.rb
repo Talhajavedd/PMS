@@ -1,7 +1,7 @@
 class Admin::ProjectsController < Admin::AdminsController
   before_action :set_client, only: %i[new create edit update]
   before_action :set_project, only: %i[show edit update destroy]
-  before_action :set_project_users, only: %i[new edit]
+  before_action :set_project_users, only: %i[new edit create update]
 
   def index
     @projects = Project.search(params[:search], page: params[:page], per_page: 10, include: :client)
@@ -39,10 +39,6 @@ class Admin::ProjectsController < Admin::AdminsController
   def destroy
     @project.destroy
     redirect_to admin_projects_path
-  end
-
-  def delete
-    @project = Project.find(params[:project_id])
   end
 
   private
