@@ -1,0 +1,105 @@
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <span">Dashboard</span>
+  </li>
+</ol>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fas fa-table"></i>
+    Top Earning Projects
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Client</th>
+            <th>Total Earning</th>
+            <th>Total Hours logged</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Name</th>
+            <th>Client</th>
+            <th>Total Earning</th>
+            <th>Total Hours logged</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% @max_earning_projects.each do |project| %>
+            <tr>
+              <td><%= project.name %></td>
+              <td><%= project.client.name %></td>
+              <td><%= project.payments.sum(:amount) %></td>
+              <td><%= project.time_logs.sum(:hours) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fas fa-table"></i>
+    Least Earning Projects
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Client</th>
+            <th>Total Earning</th>
+            <th>Total Hours logged</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Name</th>
+            <th>Client</th>
+            <th>Total Earning</th>
+            <th>Total Hours logged</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% @min_earning_projects.each do |project| %>
+            <tr>
+              <td><%= project.name %></td>
+              <td><%= project.client.name %></td>
+              <td><%= project.payments.sum(:amount) %></td>
+              <td><%= project.time_logs.sum(:hours) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fas fa-chart-pie"></i>
+    Payments Graph
+  </div>
+  <div class="card-body">
+    <%= pie_chart @payments %>
+  </div>
+
+</div>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fas fa-chart-pie"></i>
+    Time Logs Graph
+  </div>
+  <div class="card-body">
+    <%= pie_chart @time_logs %>
+  </div>
+</div>
