@@ -5,13 +5,17 @@
   <li class="breadcrumb-item active">Details</li>
 </ol>
 
-<h2>User Details</h2>
-<hr>
-
-
-<div class="container">
+<div class="container mb-4">
   <div class="card card-register mx-auto mt-5">
+    <div class="card-header">User Details</div>
     <div class="card-body text-center">
+      <% unless @user.attachment.nil? %>
+        <div class="row"><div class="col-4"></div>
+          <div class="col-4 text-center">
+            <%= image_tag @user.attachment.avatar.url, class: "rounded-circle img-fluid mb-4" %><div class="col-4"></div>
+          </div>
+        </div>
+      <%end%>
       <p>
         <span class="font-weight-light font-italic"> Username: </span>
         <span class="font-weight-bold"><%= @user.username %></span>
