@@ -6,7 +6,6 @@ Rails.application.routes.draw do
       member do
         patch 'set_user_activation'
       end
-      get 'delete'
     end
     resources :clients do
     end

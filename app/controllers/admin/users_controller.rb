@@ -41,10 +41,6 @@ class Admin::UsersController < Admin::AdminsController
     redirect_to admin_users_path(@user)
   end
 
-  def delete
-    @user = User.find(params[:user_id])
-  end
-
   def set_user
     @user = User.find(params[:id])
   end
