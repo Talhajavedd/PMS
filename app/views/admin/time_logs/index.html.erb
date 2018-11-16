@@ -29,7 +29,7 @@
               <td><%= time_log.date.to_date %></td>
               <td><%= time_log.hours %></td>
               <td><%= link_to 'Edit', edit_admin_project_time_log_path(@project, time_log), class: "btn btn-dark" %></td>
-              <td><%= link_to "Delete", admin_project_time_log_delete_path(@project,time_log), remote: true, class: "btn btn-danger" %></td>
+              <td><%= link_to "Delete", admin_project_time_log_path(@project, time_log), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
             </tr>
           <% end %>
         </tbody>

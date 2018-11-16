@@ -18,7 +18,6 @@ Rails.application.routes.draw do
         get 'delete'
       end
       resources :time_logs do
-        get 'delete'
       end
       resources :comments do
       end
@@ -30,7 +29,6 @@ Rails.application.routes.draw do
       get 'delete'
     end
     resources :time_logs do
-      get 'delete'
     end
     resources :comments do
     end

@@ -32,11 +32,6 @@ class Admin::TimeLogsController < Admin::AdminsController
     redirect_to admin_project_time_logs_path(@project)
   end
 
-  def delete
-    @project = Project.find(params[:project_id])
-    @time_log = @project.time_logs.find(params[:time_log_id])
-  end
-
   private
 
   def set_project
@@ -44,7 +39,7 @@ class Admin::TimeLogsController < Admin::AdminsController
   end
 
   def set_time_log
-    @time_log = TimeLog.find(params[:id])
+    @time_log = @project.time_logs.find(params[:id])
   end
 
   def time_log_params

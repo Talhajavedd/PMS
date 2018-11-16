@@ -35,11 +35,6 @@ class TimeLogsController < ApplicationController
     redirect_to project_time_logs_path(@project)
   end
 
-  def delete
-    @project = current_user.projects.find(params[:project_id])
-    @time_log = @project.time_logs.find(params[:time_log_id])
-  end
-
   private
 
   def set_project
@@ -48,7 +43,7 @@ class TimeLogsController < ApplicationController
   end
 
   def set_time_log
-    @time_log = TimeLog.find(params[:id])
+    @time_log = @project.time_logs.find(params[:id])
     authorize @time_log
   end
 
