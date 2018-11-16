@@ -13,4 +13,6 @@ class TimeLog < ApplicationRecord
   def hours=(new_hours)
     self[:hours] = (new_hours[4] + (new_hours[5].to_f / 60.to_f))
   end
+
+  paginates_per 10
 end
