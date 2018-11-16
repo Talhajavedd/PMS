@@ -7,7 +7,7 @@ class PaymentPolicy < ApplicationPolicy
     user.manager?
   end
 
-  def new
+  def new?
     user.manager?
   end
 

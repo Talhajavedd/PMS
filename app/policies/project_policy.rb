@@ -3,7 +3,7 @@ class ProjectPolicy < ApplicationPolicy
     project.users.exists?(id: user.id) || user.manager?
   end
 
-  def new
+  def new?
     user.manager?
   end
 
