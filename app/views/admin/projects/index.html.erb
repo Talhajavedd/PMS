@@ -58,6 +58,9 @@
           <% end %>
         </tbody>
       </table>
+      <div class="my-4">
+        <%= paginate @projects, class: "pagination" %>
+      </div>
     </div>
     <div class="text-right mt-3">
       <%= link_to 'New Project', new_admin_project_path, class: "btn btn-dark" %>

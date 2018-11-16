@@ -4,11 +4,11 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
   def index
-    @projects = Project.search_project(params[:search], current_user)
+    @projects = Project.search_project(params[:search], current_user, params[:page])
   end
 
   def show
-    @comments = @project.comments.includes(:user)
+    @comments = @project.comments.page(params[:page]).includes(:user)
     @attachments = @project.attachments
   end
 

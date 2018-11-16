@@ -4,11 +4,11 @@ class Admin::ProjectsController < Admin::AdminsController
   before_action :set_project_users, only: %i[new edit]
 
   def index
-    @projects = Project.search(params[:search], include: :client)
+    @projects = Project.search(params[:search], page: params[:page], per_page: 10, include: :client)
   end
 
   def show
-    @comments = @project.comments.includes(:user)
+    @comments = @project.comments.page(params[:page]).includes(:user)
     @attachments = @project.attachments
   end
 

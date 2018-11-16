@@ -13,11 +13,11 @@ class Project < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_NAME_REGEX }, length: { minimum: 5, maximum: 30 }
 
-  def self.search_project(params, user)
+  def self.search_project(params, user, page)
     if user.role == 'user'
-      search(params, with: { user_ids: user.id }, include: :client)
+      search(params, with: { user_ids: user.id }, page: page, per_page: 10, include: :client)
     else
-      search(params, include: :client)
+      search(params, page: page, per_page: 10, include: :client)
     end
   end
 end
