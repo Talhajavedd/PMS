@@ -33,7 +33,7 @@
               <td><%= client.company %></td>
               <td><%= link_to 'Show', admin_client_path(client), class: "btn btn-dark" %></td>
               <td><%= link_to 'Edit', edit_admin_client_path(client), class: "btn btn-dark" %></td>
-              <td><%= link_to "Delete", admin_client_delete_path(client), remote: true, class: "btn btn-danger" %></td>
+              <td><%= link_to "Delete", admin_client_path(client), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
             </tr>
           <% end %>
         </tbody>

@@ -37,10 +37,6 @@ class ClientsController < ApplicationController
     redirect_to clients_path
   end
 
-  def delete
-    @client = Client.find(params[:client_id])
-  end
-
   private
 
   def set_client

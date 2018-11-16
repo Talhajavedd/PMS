@@ -9,7 +9,6 @@ Rails.application.routes.draw do
       get 'delete'
     end
     resources :clients do
-      get 'delete'
     end
     resources :admins, only: [:index], as: 'root'
     resources :projects do
@@ -34,7 +33,6 @@ Rails.application.routes.draw do
     end
   end
   resources :clients do
-    get 'delete'
   end
 
   match '*path', to: 'exceptions#catch_404', via: :all
