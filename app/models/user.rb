@@ -63,11 +63,11 @@ class User < ApplicationRecord
     roles.reject { |role, _| role == ADMIN }
   end
 
-  def self.search_user(params, role_param)
+  def self.search_user(params, role_param, page)
     if role_param.blank?
-      search(Riddle.escape(params.to_s), without: { role: 'admin' })
+      search(Riddle.escape(params.to_s), without: { role: 'admin' }, page: page, per_page: 10)
     else
-      search(Riddle.escape(params.to_s), without: { role: 'admin' }, with: { role: role_param.to_s })
+      search(Riddle.escape(params.to_s), without: { role: 'admin' }, with: { role: role_param.to_s }, page: page, per_page: 10)
     end
   end
 end

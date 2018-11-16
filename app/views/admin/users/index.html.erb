@@ -53,6 +53,9 @@
           <% end %>
         </tbody>
       </table>
+      <div class="my-4">
+        <%= paginate @users, class: "pagination" %>
+      </div>
       <div class="text-right">
         <%= link_to 'New User', new_admin_user_path, class: "btn btn-dark" %>
       </div>
