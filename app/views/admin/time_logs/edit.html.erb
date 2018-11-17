@@ -25,6 +25,10 @@
               Hours:
               <%= f.time_select :hours %>
             </div>
+            <div class="dropdown float-right mb-4">
+              User:
+              <%= collection_select(:time_log, :user_id, @project_users, :id, :username, {}, { class: "btn btn-secondary"}) %>
+            </div>
           </div>
           <%= f.submit class: "btn btn-dark btn-block" %>
         <% end %>

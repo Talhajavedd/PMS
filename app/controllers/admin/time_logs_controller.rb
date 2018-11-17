@@ -1,5 +1,6 @@
 class Admin::TimeLogsController < Admin::AdminsController
   before_action :set_project
+  before_action :project_users
   before_action :set_time_log, only: %i[edit update destroy]
 
   def index
@@ -15,7 +16,6 @@ class Admin::TimeLogsController < Admin::AdminsController
 
   def create
     @time_log = @project.time_logs.new(time_log_params)
-    @time_log.user_id = current_user.id
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
   end
 
@@ -32,6 +32,12 @@ class Admin::TimeLogsController < Admin::AdminsController
     redirect_to admin_project_time_logs_path(@project)
   end
 
+  def project_users
+    all_managers = User.where(role: 'manager')
+    all_users = @project.users
+    @project_users = all_managers + all_users
+  end
+
   private
 
   def set_project
@@ -43,6 +49,6 @@ class Admin::TimeLogsController < Admin::AdminsController
   end
 
   def time_log_params
-    params.require(:time_log).permit(:date, :hours)
+    params.require(:time_log).permit(:date, :hours, :user_id)
   end
 end
