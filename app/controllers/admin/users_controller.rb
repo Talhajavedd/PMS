@@ -24,7 +24,11 @@ class Admin::UsersController < Admin::AdminsController
   end
 
   def update
-    if @user.update_without_password(user_params)
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+    if @user.update(user_params)
       redirect_to admin_user_path(@user)
     else
       render 'edit'
