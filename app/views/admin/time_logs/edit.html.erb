@@ -13,7 +13,9 @@
     <div class="card-header">Update Time Log Info</div>
       <div class="card-body">
         <%= form_for [:admin, @project, @time_log] do |f| %>
-
+          <div id="errors">
+            <%= render 'layouts/error_messages', object: @time_log %>
+          </div>
           <div class="form-group">
             <div class="form-label-group">
               Date:

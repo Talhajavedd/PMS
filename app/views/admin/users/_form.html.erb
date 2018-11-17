@@ -1,5 +1,8 @@
 <div class="card-body">
   <%= form_for [:admin, @user], html: { multipart: true } do |f| %>
+    <div id="errors">
+      <%= render 'layouts/error_messages', object: @user %>
+    </div>
     <% unless @user.attachment.nil? %>
       <div class="row">
         <div class="col-4"></div>

@@ -1,6 +1,8 @@
 <div class="card-body">
   <%= form_for [:admin, @client] do |f| %>
-
+    <div id="errors">
+      <%= render 'layouts/error_messages', object: @client %>
+    </div>
     <div class="form-group">
       <div class="form-label-group">
         <%= f.text_field :name, class: "form-control", placeholder: 'Name' %>
