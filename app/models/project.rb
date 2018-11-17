@@ -9,9 +9,7 @@ class Project < ApplicationRecord
 
   accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
 
-  VALID_NAME_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
-
-  validates :name, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_NAME_REGEX }, length: { minimum: 5, maximum: 30 }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 5, maximum: 30 }
 
   def self.search_project(params, user, page)
     if user.role == 'user'
