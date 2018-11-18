@@ -38,7 +38,7 @@
               <td>
                 <%= link_to 'Add Time Logs', new_admin_project_time_log_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-outline-primary'}  %>
               </td>
-              <td><%= link_to 'Show Time Logs', admin_project_time_logs_path(project), class: "btn btn-outline-primary" %></td>
+              <td><%= link_to 'Show Time Logs', admin_project_path(project), class: "btn btn-outline-primary" %></td>
               <td>
                 <%= link_to new_admin_project_comment_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-primary'} do %>
                   <i class="fas fa-fw fa-comments"></i>

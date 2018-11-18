@@ -5,18 +5,16 @@
   <li class="breadcrumb-item active">Details</li>
 </ol>
 
-<h2><%= @project.name %></h2>
-<hr>
-
 <div class="container">
-  <div class="card card-register mx-auto mt-5">
+  <div class="card card-register mx-auto my-5">
+    <div class="card-header"><%= @project.name %></div>
     <div class="card-body text-center">
       <p>
-        <span class="font-weight-light font-italic">Total Payments </span>
-        <span class="font-weight-bold"></span>
+        <span class="font-weight-light font-italic">Total Payment:</span>
+        <span class="font-weight-bold"><%= @project.payments.sum(:amount) %></span>
       </p>
       <p>
-        <span class="font-weight-light font-italic"> Project's client name: </span>
+        <span class="font-weight-light font-italic">Client: </span>
         <span class="font-weight-bold"><%= @project.client.name %></span>
       </p>
       <% @attachments.each do |attachment| %>
@@ -24,51 +22,26 @@
       <% end %>
     </div>
   </div>
-
-  <ul class="nav nav-tabs nav-fill">
-      <li>
-          <a class="nav-link active" data-toggle="tab" href="#comments">Comments</a>
-      </li>
-      <li>
-          <a class="nav-link" data-toggle="tab" href="#tab2">Time Logs</a>
-      </li>
-  </ul>
-  <div class="tab-content my-3">
-    <div class="tab-pane fade show active p-10" id="comments" role="tabpanel">
-      <div class="row">
-        <div class="col-12">
-          <% if @comments.any? %>
-            <div class="card rounded-0">
-              <% @comments.each do |comment| %>
-                <div class="card-header p-0">
-                  <div class="row mx-1 mt-2">
-                    <div class="col-6 font-weight-bold small">  <%= comment.user.username %></div>
-                    <div class="col-6 small">
-                      <div class="row float-right">
-                        <p class="pr-2"><%= comment.created_at.to_date %>
-                          <%= link_to edit_admin_project_comment_path(@project, comment), class: "ml-2" do %>
-                            <i class="fas fa-edit"></i>
-                          <% end %>
-                          <%= link_to admin_project_comment_path(@project, comment), class: "ml-2", method: :delete, data: { confirm: 'Are you sure?' } do %>
-                            <i class="fas fa-trash"></i>
-                          <% end %>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body small">
-                  <%= comment.body %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="float-right my-4">
-        <%= paginate @comments, class: "pagination" %>
-      </div>
+  <h5>Time logs</h5>
+  <hr>
+  <div class="row mt-5">
+    <div class="col-12">
+      <%= render 'admin/time_logs/project_time_logs' %>
     </div>
-    <div class="tab-pane fade" id="tab2" role="tabpanel">tab 2 content..</div>
+  </div>
+  <h5>Comments</h5>
+  <hr>
+  <div class="row mt-5">
+    <div class="col-12">
+      <%= render 'admin/comments/all_new_comments' %>
+    </div>
   </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
