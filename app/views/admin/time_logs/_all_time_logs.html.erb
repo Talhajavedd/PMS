@@ -1,0 +1,29 @@
+<div class="card-body">
+  <div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Date</th>
+          <th>Hours</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @all_time_logs.each do |time_log| %>
+          <tr>
+            <td><%= time_log.user.username %></td>
+            <td><%= time_log.date.to_date %></td>
+            <td><%= time_log.hours %></td>
+            <td>
+              <%= link_to 'Edit', edit_admin_project_time_log_path(@project, time_log), class: "btn btn-dark" %>
+            </td>
+            <td>
+              <%= link_to "Delete", admin_project_time_log_path(@project,time_log), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
