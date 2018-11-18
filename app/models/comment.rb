@@ -4,5 +4,5 @@ class Comment < ApplicationRecord
   belongs_to :user
   validates :body, presence: true
 
-  paginates_per 10
+  paginates_per 5
 end

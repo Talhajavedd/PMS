@@ -8,8 +8,10 @@ class Admin::ProjectsController < Admin::AdminsController
   end
 
   def show
-    @comments = @project.comments.page(params[:page]).includes(:user)
+    @commentable = @project
+    @all_comments = @project.comments.page(params[:page]).includes(:user)
     @attachments = @project.attachments
+    @all_time_logs = @project.time_logs.page(params[:page])
   end
 
   def new
