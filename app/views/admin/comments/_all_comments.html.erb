@@ -1,0 +1,24 @@
+<div class="card" rounded-0">
+  <% @all_comments.each do |comment| %>
+    <div class="card-header p-0">
+      <div class="row mx-1 mt-2">
+        <div class="col-6 font-weight-bold small">  <%= comment.user.username %></div>
+        <div class="col-6 small">
+          <div class="row float-right">
+            <p class="pr-2"><%= comment.created_at.to_date %>
+              <%= link_to edit_admin_project_comment_path(@commentable, comment), class: "ml-2" do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <%= link_to admin_project_comment_path(@commentable, comment), class: "ml-2", method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="fas fa-trash"></i>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body small">
+      <%= comment.body %>
+    </div>
+  <% end %>
+</div>

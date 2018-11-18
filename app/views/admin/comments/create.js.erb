@@ -1,6 +1,7 @@
 $('#errors').html("<%= j render 'layouts/error_messages', object: @comment %>");
 <% if @comment.persisted? %>
   $('#load-comments').html("<%= j render 'recent_comments', object: @comments %>");
+  $('#load-project-comments').html("<%= j render 'all_comments', object: @all_comments %>");
   $('.flash-messages').html("<%= j render 'layouts/flash_messages', flash: flash %>");
   $('#commentbox').val("");
   $('#commentbox').placeholder('Write comment...');

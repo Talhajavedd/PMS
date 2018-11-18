@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-12">
+    <div id="load-project-comments">
+      <%= render 'comments/all_comments' %>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <%= form_for [@project, @project.comments.build], remote: true do |f| %>
+          <div id="errors"></div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <%= f.text_area :body, id: "commentbox", class: "form-control" , placeholder: 'Write comment...' %>
+            </div>
+          </div>
+          <%= f.submit class: "btn btn-dark btn-block" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="load-pagination">
+  <%= render 'comments/pagination' %>
+</div>
