@@ -20,11 +20,12 @@ class TimeLogsController < ApplicationController
     @time_log.user_id = current_user.id
     authorize @time_log
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
+    @all_time_logs = @project.time_logs.page(params[:page]).includes(:user)
   end
 
   def update
     if @time_log.update(time_log_params)
-      redirect_to project_time_logs_path(@project), notice: 'Time succesfully updated!'
+      redirect_to @project, notice: 'Time succesfully updated!'
     else
       render 'edit'
     end
@@ -32,7 +33,7 @@ class TimeLogsController < ApplicationController
 
   def destroy
     @time_log.destroy
-    redirect_to project_time_logs_path(@project)
+    redirect_to @project
   end
 
   private

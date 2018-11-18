@@ -11,7 +11,7 @@ class Admin::ProjectsController < Admin::AdminsController
     @commentable = @project
     @all_comments = @project.comments.page(params[:page]).includes(:user)
     @attachments = @project.attachments
-    @all_time_logs = @project.time_logs.page(params[:page])
+    @all_time_logs = @project.time_logs.page(params[:page]).includes(:user)
   end
 
   def new

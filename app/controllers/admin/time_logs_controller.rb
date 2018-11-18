@@ -17,11 +17,12 @@ class Admin::TimeLogsController < Admin::AdminsController
   def create
     @time_log = @project.time_logs.new(time_log_params)
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
+    @all_time_logs = @project.time_logs.page(params[:page]).includes(:user)
   end
 
   def update
     if @time_log.update(time_log_params)
-      redirect_to admin_project_time_logs_path(@project), notice: 'Time succesfully updated!'
+      redirect_to admin_project_path(@project), notice: 'Time succesfully updated!'
     else
       render 'edit'
     end
@@ -29,7 +30,7 @@ class Admin::TimeLogsController < Admin::AdminsController
 
   def destroy
     @time_log.destroy
-    redirect_to admin_project_time_logs_path(@project)
+    redirect_to admin_project_path(@project)
   end
 
   def project_users

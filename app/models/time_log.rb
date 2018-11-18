@@ -14,5 +14,5 @@ class TimeLog < ApplicationRecord
     self[:hours] = (new_hours[4] + (new_hours[5].to_f / 60.to_f))
   end
 
-  paginates_per 10
+  paginates_per 5
 end
