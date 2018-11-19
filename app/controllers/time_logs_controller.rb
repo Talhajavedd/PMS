@@ -20,7 +20,7 @@ class TimeLogsController < ApplicationController
     @time_log.user_id = current_user.id
     authorize @time_log
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
-    @all_time_logs = @project.time_logs.page(params[:page]).includes(:user)
+    @all_time_logs = @project.time_logs.page(params[:time_log_page]).includes(:user)
   end
 
   def update

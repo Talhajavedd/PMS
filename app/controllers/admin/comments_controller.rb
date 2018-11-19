@@ -14,7 +14,7 @@ class Admin::CommentsController < Admin::AdminsController
     @comment.user_id = current_user.id
     @comment.save
     @comments = @commentable.comments.last(5)
-    @all_comments = @commentable.comments.page(params[:page]).includes(:user)
+    @all_comments = @commentable.comments.page(params[:comment_page]).includes(:user)
   end
 
   def update

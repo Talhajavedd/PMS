@@ -17,7 +17,7 @@ class Admin::TimeLogsController < Admin::AdminsController
   def create
     @time_log = @project.time_logs.new(time_log_params)
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
-    @all_time_logs = @project.time_logs.page(params[:page]).includes(:user)
+    @all_time_logs = @project.time_logs.page(params[:time_log_page]).includes(:user)
   end
 
   def update
