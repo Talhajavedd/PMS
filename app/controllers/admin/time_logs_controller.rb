@@ -16,11 +16,13 @@ class Admin::TimeLogsController < Admin::AdminsController
 
   def create
     @time_log = @project.time_logs.new(time_log_params)
+    @time_log.set_hours(time_log_params)
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
     @all_time_logs = @project.time_logs.page(params[:time_log_page]).includes(:user)
   end
 
   def update
+    @time_log.set_hours(time_log_params)
     if @time_log.update(time_log_params)
       redirect_to admin_project_path(@project), notice: 'Time succesfully updated!'
     else
@@ -50,6 +52,6 @@ class Admin::TimeLogsController < Admin::AdminsController
   end
 
   def time_log_params
-    params.require(:time_log).permit(:date, :hours, :user_id)
+    params.require(:time_log).permit(:date, :time_log, :user_id)
   end
 end

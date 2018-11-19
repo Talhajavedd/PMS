@@ -17,6 +17,7 @@ class TimeLogsController < ApplicationController
 
   def create
     @time_log = @project.time_logs.new(time_log_params)
+    @time_log.set_hours(time_log_params)
     @time_log.user_id = current_user.id
     authorize @time_log
     flash.now[:notice] = 'Time added succesfully created!' if @time_log.save
@@ -24,6 +25,7 @@ class TimeLogsController < ApplicationController
   end
 
   def update
+    @time_log.set_hours(time_log_params)
     if @time_log.update(time_log_params)
       redirect_to @project, notice: 'Time succesfully updated!'
     else
@@ -49,6 +51,6 @@ class TimeLogsController < ApplicationController
   end
 
   def time_log_params
-    params.require(:time_log).permit(:date, :hours)
+    params.require(:time_log).permit(:date, :time_log)
   end
 end

@@ -10,19 +10,19 @@
         </tr>
       </thead>
       <tbody>
-        <% @all_time_logs.each do |time_log| %>
+        <% @all_time_logs.each do |time| %>
           <tr>
-            <td><%= time_log.user.username %></td>
-            <td><%= time_log.date.to_date %></td>
-            <td><%= time_log.hours %></td>
+            <td><%= time.user.username %></td>
+            <td><%= time.date.to_date %></td>
+            <td><%= time.hours %></td>
             <td>
-              <% if policy(time_log).edit? %>
-                <%= link_to 'Edit', edit_project_time_log_path(@project, time_log), class: "btn btn-dark" %>
+              <% if policy(time).edit? %>
+                <%= link_to 'Edit', edit_project_time_log_path(@project, time), class: "btn btn-dark" %>
               <% end %>
             </td>
             <td>
-              <% if policy(time_log).destroy? %>
-                <%= link_to "Delete", project_time_log_path(@project,time_log), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% if policy(time).destroy? %>
+                <%= link_to "Delete", project_time_log_path(@project,time), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
               <% end %>
             </td>
           </tr>
