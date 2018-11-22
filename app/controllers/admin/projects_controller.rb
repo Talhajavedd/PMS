@@ -4,7 +4,7 @@ class Admin::ProjectsController < Admin::AdminsController
   before_action :set_project_users, only: %i[new edit create update]
 
   def index
-    @projects = Project.search(params[:search], page: params[:page], per_page: 10, include: :client)
+    @projects = Project.search_with(params)
   end
 
   def show

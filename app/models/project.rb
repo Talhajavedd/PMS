@@ -11,11 +11,21 @@ class Project < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 5, maximum: 30 }
 
-  def self.search_project(params, user, page)
-    if user.role == 'user'
-      search(params, with: { user_ids: user.id }, page: page, per_page: 10, include: :client)
-    else
-      search(params, page: page, per_page: 10, include: :client)
-    end
+  def self.search_with(params, user = nil)
+    params = {} if params.blank?
+    search_params = default_search_options(params)
+    search_params[:with][:user_ids] = user.id if user && user.user?
+    search(Riddle.escape(params[:search].to_s), search_params)
+  end
+
+  def self.default_search_options(pagination_options)
+    {
+      with: {},
+      page: pagination_options[:page],
+      per_page: 10,
+      sql: {
+        include: [:client]
+      }
+    }
   end
 end
