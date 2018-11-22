@@ -54,8 +54,8 @@
         </div>
       </div>
     </div>
-    <div class="dropdown">
-      <%= f.select(:role, User.roles_except_admin.keys.map {|role| [role.titleize,role]}, {}, { class: "btn btn-secondary dropdown-toggle mb-3" }) %>
+    <div class="mb-3">
+      <%= f.select(:role, User.roles_except_admin.keys.map {|role| [role.titleize, role]}, {}, {class: "form-control"}) %>
     </div>
     <%= f.submit class: "btn btn-dark btn-block" %>
   <% end %>
