@@ -21,24 +21,19 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Projects</th>
-            <th colspan="1"></th>
+            <th class="text-center">Projects</th>
           </tr>
         </thead>
         <tbody>
           <% @client.projects.each do |project| %>
             <tr>
-              <td><%= project.name %></td>
-              <td>
-                <% if policy(project).show? %>
-                  <%= link_to 'Show', project_path(project), class: "btn btn-dark" %>
-                <% end %>
+              <td class="text-center">
+                <%= show_project(policy(project).show?, project) %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
-
     </div>
   </div>
 </div>

@@ -5,21 +5,33 @@
   <li class="breadcrumb-item active">Details</li>
 </ol>
 
-<h2>Client Details</h2>
+<h2><%= @client.company %> Company</h2>
 <hr>
 
-
 <div class="container">
-  <div class="card card-register mx-auto mt-5">
-    <div class="card-body text-center">
-      <p>
-        <span class="font-weight-light font-italic"> Client name: </span>
-        <span class="font-weight-bold"><%= @client.name %></span>
-      </p>
-      <p>
-        <span class="font-weight-light font-italic"> Client Company: </span>
-        <span class="font-weight-bold"><%= @client.company %></span>
-      </p>
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="fas fa-table"></i>
+      <%= @client.name %> projects
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th class="text-center">Projects</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @client.projects.each do |project| %>
+              <tr>
+                <td class="text-center"><%= link_to project.name, admin_project_path(project) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
+
