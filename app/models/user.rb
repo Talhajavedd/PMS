@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_one :attachment, as: :attachable, dependent: :destroy
   after_save ThinkingSphinx::RealTime.callback_for(:user)
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -63,11 +64,19 @@ class User < ApplicationRecord
     roles.reject { |role, _| role == ADMIN }
   end
 
-  def self.search_user(params, role_param, page)
-    if role_param.blank?
-      search(Riddle.escape(params.to_s), without: { role: 'admin' }, page: page, per_page: 10)
-    else
-      search(Riddle.escape(params.to_s), without: { role: 'admin' }, with: { role: role_param.to_s }, page: page, per_page: 10)
-    end
+  def self.search_with(params)
+    params = {} if params.blank?
+    search_params = default_search_options(params)
+    search_params[:with][:role] = params[:role]  unless params[:role].blank?
+    search(Riddle.escape(params[:search].to_s), search_params)
+  end
+
+    def self.default_search_options(pagination_options)
+    {
+      with: {},
+      without: { role: 'admin' },
+      page: pagination_options[:page],
+      per_page: 10
+    }
   end
 end

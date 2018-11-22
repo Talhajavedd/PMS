@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::AdminsController
   before_action :set_user, only: %i[destroy show edit update set_user_activation]
 
   def index
-    @users = User.search_user(params[:search], params[:role], params[:page])
+    @users = User.search_with(params)
   end
 
   def show; end
