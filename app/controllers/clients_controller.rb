@@ -2,7 +2,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: %i[show edit update destroy]
 
   def index
-    @clients = Client.search(params[:search], page: params[:page], per_page: 10)
+    @clients = Client.search_with(params)
   end
 
   def show; end
