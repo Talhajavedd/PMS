@@ -1,9 +1,35 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <span">Dashboard</span>
+    <span>Dashboard</span>
   </li>
 </ol>
+
+<div class='row'>
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-chart-pie"></i>
+        Payments Graph
+      </div>
+      <div class="card-body">
+        <%= pie_chart @payments %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-chart-pie"></i>
+        Time Logs Graph
+      </div>
+      <div class="card-body">
+        <%= pie_chart @time_logs %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="card mb-3">
   <div class="card-header">
@@ -64,26 +90,5 @@
         </tbody>
       </table>
     </div>
-  </div>
-</div>
-
-<div class="card mb-3">
-  <div class="card-header">
-    <i class="fas fa-chart-pie"></i>
-    Payments Graph
-  </div>
-  <div class="card-body">
-    <%= pie_chart @payments %>
-  </div>
-
-</div>
-
-<div class="card mb-3">
-  <div class="card-header">
-    <i class="fas fa-chart-pie"></i>
-    Time Logs Graph
-  </div>
-  <div class="card-body">
-    <%= pie_chart @time_logs %>
   </div>
 </div>
