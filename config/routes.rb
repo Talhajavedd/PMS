@@ -19,6 +19,20 @@ Rails.application.routes.draw do
       end
     end
   end
+  namespace :api do
+    namespace :v1 do
+      namespace :sessions do
+        post 'create'
+        delete 'destroy'
+      end
+      resources :projects do
+        resources :payments
+        resources :comments
+        resources :time_logs
+      end
+      resources :clients
+    end
+  end
   resources :projects do
     resources :payments do
     end
