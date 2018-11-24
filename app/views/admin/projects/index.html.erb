@@ -1,7 +1,7 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <span">Dashboard</span>
+    <span>Dashboard</span>
   </li>
   <li class="breadcrumb-item active">Projects</li>
 </ol>
@@ -10,6 +10,7 @@
   <div class="card-header">
     <i class="fas fa-table"></i>
     Listing projects
+    <%= link_to '+', new_admin_project_path, class: "btn btn-dark float-right" %>
   </div>
   <div class="card-body">
     <%= form_tag admin_projects_path, method: :get do %>
@@ -21,42 +22,68 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Client</th>
-            <th colspan="8"></th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Clients</th>
+            <th class="text-center" colspan="2">Payments</th>
+            <th class="text-center" colspan="2">Time Logs</th>
+            <th class="text-center">Comments</th>
+            <th class="text-center">Show</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
           </tr>
         </thead>
         <tbody>
           <% @projects.each do |project| %>
             <tr>
-              <td><%= project.name %></td>
-              <td><%= project.client.name %></td>
-              <td>
-                <%= link_to 'Add Payment', new_admin_project_payment_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-outline-success'}  %>
-              </td>
-              <td><%= link_to 'Show Payments', admin_project_payments_path(project), class: "btn btn-outline-success" %></td>
-              <td>
-                <%= link_to 'Add Time Logs', new_admin_project_time_log_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-outline-primary'}  %>
-              </td>
-              <td><%= link_to 'Show Time Logs', admin_project_path(project), class: "btn btn-outline-primary" %></td>
-              <td>
-                <%= link_to new_admin_project_comment_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-primary'} do %>
-                  <i class="fas fa-fw fa-comments"></i>
+              <td class="text-center"><%= project.name %></td>
+              <td class="text-center"><%= link_to project.client.name, admin_client_path(project.client) %></td>
+              <td class="text-center">
+                <%= link_to new_admin_project_payment_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }} do %>
+                  <h5><i class="fas fa-plus-circle text-success""></i></h5>
                 <% end %>
               </td>
-              <td><%= link_to 'Edit', edit_admin_project_path(project), class: "btn btn-dark" %></td>
-              <td><%= link_to 'Show', admin_project_path(project), class: "btn btn-dark" %></td>
-              <td><%= link_to "Delete", admin_project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+              <td class="text-center">
+                <%= link_to admin_project_payments_path(project) do %>
+                  <h5><i class="fas fa-info-circle text-success"></i></h5>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= link_to new_admin_project_time_log_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }} do %>
+                  <h5><i class="fas fa-calendar-plus text-dark"></i></h5>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= link_to admin_project_path(project) do %>
+                  <h5><i class="fas fa-info-circle text-dark"></i></h5>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= link_to new_admin_project_comment_path(project), { remote: true, data: { toggle: 'modal', target: '#myModal' }} do %>
+                  <h5><i class="fas fa-fw fa-comments text-primary"></i></h5>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= link_to admin_project_path(project) do %>
+                  <h5><i class="fas fa-info-circle text-dark"></i></h5>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= link_to edit_admin_project_path(project) do %>
+                  <h5><i class="fas fa-pen text-dark"></i></h5>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= link_to admin_project_path(project), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <h5><i class="fas fa-trash text-danger"></i></h5>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
       </table>
-      <div class="my-4">
+      <div class="my-4 float-right">
         <%= paginate @projects, class: "pagination" %>
       </div>
-    </div>
-    <div class="text-right mt-3">
-      <%= link_to 'New Project', new_admin_project_path, class: "btn btn-dark" %>
     </div>
   </div>
 </div>
