@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <span">Clients</span>
+    <span>Clients</span>
   </li>
   <li class="breadcrumb-item active">Details</li>
 </ol>
@@ -28,7 +28,7 @@
           <% @client.projects.each do |project| %>
             <tr>
               <td class="text-center">
-                <%= show_project(policy(project).show?, project) %>
+                <%= show_project_link(policy(project).show?, project) %>
               </td>
             </tr>
           <% end %>
