@@ -1,7 +1,7 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <span">Payment</span>
+    <span>Payment</span>
   </li>
   <li class="breadcrumb-item active">Index</li>
 </ol>
@@ -16,18 +16,27 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Amount</th>
-            <th>Created at</th>
-            <th colspan="2"></th>
+            <th class="text-center">Amount</th>
+            <th class="text-center">Created at</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
           </tr>
         </thead>
         <tbody>
           <% @payments.each do |payment| %>
             <tr>
-              <td><%= payment.amount %></td>
-              <td><%= payment.created_at.to_date %></td>
-              <td><%= link_to 'Edit', edit_project_payment_path(@project, payment), class: "btn btn-dark" %></td>
-              <td><%= link_to "Delete", project_payment_path(@project, payment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+              <td class="text-center"><%= payment.amount %></td>
+              <td class="text-center"><%= payment.created_at.to_date %></td>
+              <td class="text-center">
+                <%= link_to edit_project_payment_path(@project, payment) do %>
+                  <h5><i class="fas fa-pen text-dark"></i></h5>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= link_to project_payment_path(@project, payment), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <h5><i class="fas fa-trash text-danger"></i></h5>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
