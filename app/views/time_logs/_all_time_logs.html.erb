@@ -3,26 +3,31 @@
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
         <tr>
-          <th>User</th>
-          <th>Date</th>
-          <th>Hours</th>
-          <th colspan="2"></th>
+          <th class="text-center">User</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Hours</th>
+          <th class="text-center">Edit</th>
+          <th class="text-center">Delete</th>
         </tr>
       </thead>
       <tbody>
         <% @all_time_logs.each do |time| %>
           <tr>
-            <td><%= time.user.username %></td>
-            <td><%= time.date.to_date %></td>
-            <td><%= time.hours %></td>
-            <td>
+            <td class="text-center"><%= time.user.username %></td>
+            <td class="text-center"><%= time.date.to_date %></td>
+            <td class="text-center"><%= time.hours %></td>
+            <td class="text-center">
               <% if policy(time).edit? %>
-                <%= link_to 'Edit', edit_project_time_log_path(@project, time), class: "btn btn-dark" %>
+                <%= link_to edit_project_time_log_path(@project, time) do %>
+                  <h5><i class="fas fa-pen text-dark"></i></h5>
+                <% end %>
               <% end %>
             </td>
-            <td>
+            <td class="text-center">
               <% if policy(time).destroy? %>
-                <%= link_to "Delete", project_time_log_path(@project,time), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%= link_to project_time_log_path(@project, time), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <h5><i class="fas fa-trash text-danger"></i></h5>
+                <% end %>
               <% end %>
             </td>
           </tr>

@@ -2,7 +2,7 @@
   <div class="card-header">
     <i class="fas fa-table"></i>
     Listing Time Logs
-    <%= link_to '+', new_project_time_log_path(@project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-outline-primary float-right'}  %>
+    <%= link_to '+', new_project_time_log_path(@project), { remote: true, data: { toggle: 'modal', target: '#myModal' }, class: 'btn btn-outline-dark float-right'}  %>
   </div>
   <div id="load-time-logs">
     <%= render 'time_logs/all_time_logs' %>
