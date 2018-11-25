@@ -95,6 +95,8 @@ GEM
       warden (~> 1.2.3)
     erubi (1.7.1)
     execjs (2.7.0)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     ffi (1.9.25)
     font-awesome-sass (5.4.1)
       sassc (>= 1.11)
@@ -278,6 +280,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.2)
   devise
+  fast_jsonapi (~> 1.1, >= 1.1.1)
   font-awesome-sass (~> 5.4.1)
   highcharts-rails
   jbuilder (~> 2.5)
