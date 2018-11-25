@@ -13,7 +13,7 @@
         Payments Graph
       </div>
       <div class="card-body">
-        <%= pie_chart @payments %>
+        <%= pie_chart @payments, title: "Projects By Total Payment" %>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@
         Time Logs Graph
       </div>
       <div class="card-body">
-        <%= pie_chart @time_logs %>
+        <%= pie_chart @time_logs, title: "Projects By Total Time Logged" %>
       </div>
     </div>
   </div>

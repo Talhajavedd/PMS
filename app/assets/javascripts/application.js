@@ -21,7 +21,7 @@
 //= require cocoon
 //= require chosen-jquery
 //= require scaffold
-//= require Chart.bundle
+//= require highcharts
 //= require chartkick
 //= require_tree .
 //= require_self
