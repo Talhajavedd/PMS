@@ -27,9 +27,9 @@ class ApplicationController < ActionController::Base
 
   def application_layout
     if current_user
-      'logged_in_layout'
-    else
       'application'
+    else
+      'logged_in_layout'
     end
   end
 end
