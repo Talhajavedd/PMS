@@ -21,9 +21,13 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="text-right mb-4">
-          Choose Client:
-          <%= collection_select(:project, :client_id, @clients, :id, :name, {}, {class: "btn btn-secondary dropdown-toggle ml-2"}) %>
+        <div class="form-row mb-4">
+          <div class="col-6">
+            <p class="text-right mt-1">Client:</p>
+          </div>
+          <div class="col-6">
+            <%= collection_select(:project, :client_id, @clients, :id, :name, {}, { class: "form-control" }) %>
+          </div>
         </div>
         <div class="float-right mb-4">
           Users:
