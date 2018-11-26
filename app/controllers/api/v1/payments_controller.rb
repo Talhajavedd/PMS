@@ -2,7 +2,7 @@ class Api::V1::PaymentsController < Api::APIController
   before_action :set_project
 
   def index
-    successful_response(@project.payments.page(params[:page]))
+    successful_response(PaymentSerializer.new(@project.payments.page(params[:page])).serializable_hash)
   end
 
   private
