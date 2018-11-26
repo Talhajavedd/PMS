@@ -2,7 +2,7 @@ class Api::V1::CommentsController < Api::APIController
   before_action :set_commentable
 
   def index
-    successful_response(@commentable.comments)
+    successful_response(CommentSerializer.new(@commentable.comments.includes(:user).page(params[:page])).serializable_hash)
   end
 
   private
