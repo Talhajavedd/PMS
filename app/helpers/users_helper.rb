@@ -8,7 +8,7 @@ module UsersHelper
   end
 
   def roles_user
-    User.roles.keys.reject { |role| role == 'admin' }
+    User.roles.keys.reject { |role| role == 'admin' }.map { |role| role.titleize }
   end
 
   def activation_link_class(enabled)
