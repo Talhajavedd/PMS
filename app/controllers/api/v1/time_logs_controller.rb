@@ -2,7 +2,7 @@ class Api::V1::TimeLogsController < Api::APIController
   before_action :set_project
 
   def index
-    successful_response(@project.time_logs)
+    successful_response(TimeLogSerializer.new(@project.time_logs.includes(:user).page(params[:page])).serializable_hash)
   end
 
   private
