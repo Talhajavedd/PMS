@@ -11,6 +11,22 @@ class Project < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 5, maximum: 30 }
 
+  def self.max_five_projects
+    left_outer_joins(:payments, :time_logs).select('projects.*, SUM(payments.amount) AS amount_sum, SUM(time_logs.hours) AS hours_sum').group(:id).order('sum(payments.amount) desc').first(5)
+  end
+
+  def self.min_five_projects
+    left_outer_joins(:payments, :time_logs).select('projects.*, SUM(payments.amount) AS amount_sum, SUM(time_logs.hours) AS hours_sum').group(:id).order('sum(payments.amount)').first(5)
+  end
+
+  def self.current_month_payments
+    left_outer_joins(:payments).group(:name).where(payments: {created_at: Date.today.beginning_of_month..Date.today.end_of_month} ).sum(:amount)
+  end
+
+  def self.current_month_time_logs
+    left_outer_joins(:time_logs).group(:name).where(time_logs: {created_at: Date.today.beginning_of_month..Date.today.end_of_month} ).sum(:hours)
+  end
+
   def self.search_with(params, user = nil)
     params = {} if params.blank?
     search_params = default_search_options(params)

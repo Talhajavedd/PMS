@@ -48,12 +48,12 @@
           </tr>
         </thead>
         <tbody>
-          <% @max_earning_projects.each do |project| %>
+          <% @max_payment_projects.each do |project| %>
             <tr>
               <td><%= project.name %></td>
               <td><%= project.client.name %></td>
-              <td><%= project.payments.sum(:amount) %></td>
-              <td><%= project.time_logs.sum(:hours) %></td>
+              <td><%= project.amount_sum || 0 %></td>
+              <td><%= project.hours_sum || 0 %></td>
             </tr>
           <% end %>
         </tbody>
@@ -79,12 +79,12 @@
           </tr>
         </thead>
         <tbody>
-          <% @min_earning_projects.each do |project| %>
+          <% @least_payment_projects.each do |project| %>
             <tr>
               <td><%= project.name %></td>
               <td><%= project.client.name %></td>
-              <td><%= project.payments.sum(:amount) %></td>
-              <td><%= project.time_logs.sum(:hours) %></td>
+              <td><%= project.amount_sum || 0 %></td>
+              <td><%= project.hours_sum || 0 %></td>
             </tr>
           <% end %>
         </tbody>

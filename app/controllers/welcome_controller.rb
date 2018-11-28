@@ -1,9 +1,9 @@
 class WelcomeController < ApplicationController
   def index
-    @max_earning_projects = Project.includes(:client).left_outer_joins(:payments).group(:name).order("sum(payments.amount) DESC").first(5)
-    @min_earning_projects = Project.includes(:client).left_outer_joins(:payments).group(:name).order("sum(payments.amount)").first(5)
+    @max_payment_projects = Project.includes(:client).max_five_projects
+    @least_payment_projects = Project.includes(:client).min_five_projects
 
-    @payments = Project.joins(:payments).group(:name).where(payments: {created_at: Date.today.beginning_of_month..Date.today.end_of_month} ).sum(:amount)
-    @time_logs = Project.joins(:time_logs).group(:name).where(time_logs: {created_at: Date.today.beginning_of_month..Date.today.end_of_month} ).sum(:hours)
+    @payments = Project.current_month_payments
+    @time_logs = Project.current_month_time_logs
   end
 end
