@@ -46,7 +46,7 @@ class Admin::UsersController < Admin::AdminsController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.where.not(role: "admin").find(params[:id])
   end
 
   private
